@@ -1,0 +1,294 @@
+/* Gaya dasar & Latar Belakang */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #000000;
+    overflow-x: hidden;
+}
+
+/* ================================================================ */
+/* ============= EFEK LATAR BELAKANG CAIR (LIQUID) ================ */
+/* ================================================================ */
+.background-shapes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.shape1, .shape2 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+}
+
+.shape1 {
+    width: 500px;
+    height: 500px;
+    /* BERUBAH: gradasi dari rose ke toska terang */
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.4) 0%, rgba(0,0,0,0) 70%);
+    top: -10%;
+    left: -10%;
+    animation: moveShape1 20s infinite alternate ease-in-out;
+}
+
+.shape2 {
+    width: 600px;
+    height: 600px;
+    /* BERUBAH: gradasi dari dark rose ke kuning pucat */
+    background: radial-gradient(circle, rgba(253, 224, 71, 0.2) 0%, rgba(0,0,0,0) 70%);
+    bottom: -15%;
+    right: -15%;
+    animation: moveShape2 25s infinite alternate ease-in-out;
+}
+
+@keyframes moveShape1 {
+    from { transform: translate(-20%, -20%) rotate(0deg); }
+    to { transform: translate(20%, 20%) rotate(360deg); }
+}
+
+@keyframes moveShape2 {
+    from { transform: translate(10%, 10%) rotate(0deg); }
+    to { transform: translate(-10%, -10%) rotate(180deg); }
+}
+
+
+/* ================================================================ */
+/* ================= EFEK KACA (GLASSMORPHISM) ==================== */
+/* ================================================================ */
+
+/* Header artikel */
+.article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.3s ease;
+    /* BERUBAH: warna teks dari pink muda ke toska muda */
+    color: #5eead4;
+    /* BERUBAH: latar belakang dari ungu gelap ke toska gelap */
+    background: rgba(15, 50, 45, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    position: sticky;
+    top: 1rem;
+    z-index: 10;
+}
+
+.article-header h3 {
+     /* BERUBAH: warna teks dari pink sangat muda ke toska sangat muda */
+     color: #ccfbf1;
+}
+
+/* Konten artikel */
+.article-content {
+    /* BERUBAH: latar belakang dari ungu gelap ke toska gelap */
+    background: rgba(15, 50, 45, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 0px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
+    border-radius: 0 0 0.75rem 0.75rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.7s ease-in-out, padding 0.5s ease-in-out;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.article-content-inner p {
+    margin-bottom: 1rem;
+    text-align: justify;
+    text-indent: 2em;
+}
+.article-content-inner p:last-child {
+    margin-bottom: 0;
+}
+
+/* Saat artikel aktif (terbuka) */
+.article-container.active .article-header {
+    border-radius: 0.75rem 0.75rem 0 0;
+    /* BERUBAH: latar belakang ke toska gelap (lebih pekat) */
+    background: rgba(15, 50, 45, 0.5);
+}
+
+.article-container.active .article-content {
+    max-height: 90vh; 
+    overflow-y: auto; 
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.collapse-icon svg {
+    transition: transform 0.3s ease-in-out;
+    /* BERUBAH: stroke ikon dari pink muda ke toska muda */
+    stroke: #5eead4;
+}
+
+.article-container.active .collapse-icon svg {
+    transform: rotate(180deg);
+}
+
+/* GAYA SCROLLBAR KUSTOM */
+.article-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.article-content::-webkit-scrollbar-track {
+    /* BERUBAH: track dari ungu transparan ke toska transparan */
+    background: rgba(15, 50, 45, 0.1);
+    border-radius: 10px;
+}
+
+.article-content::-webkit-scrollbar-thumb {
+    /* BERUBAH: thumb dari rose terang ke toska terang */
+    background-color: #14b8a6;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+.article-content::-webkit-scrollbar-thumb:hover {
+    /* BERUBAH: hover thumb ke toska lebih muda */
+    background-color: #2dd4bf;
+}
+
+
+/* ================================================================ */
+/* ======================= GAYA POP-UP ============================ */
+/* ================================================================ */
+
+.original-text-segment {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    padding: 2px 4px;
+    border-radius: 6px;
+}
+
+.original-text-segment:hover {
+    /* BERUBAH: hover dari rose transparan ke toska transparan */
+    background-color: rgba(20, 184, 166, 0.2);
+}
+
+.selected-text {
+    /* BERUBAH: latar dari rose terang ke toska terang */
+    background-color: #14b8a6;
+    /* BERUBAH: warna teks dari putih kemerahan ke putih kebiruan/toska */
+    color: #f0fdfa;
+    font-weight: 500;
+}
+
+#translation-popup {
+    position: absolute;
+    z-index: 20;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease-in-out;
+    pointer-events: none;
+    opacity: 0;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    max-width: 320px;
+    font-size: 0.9rem;
+    /* BERUBAH: warna teks ke kuning pucat */
+    color: #fef08a;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* BERUBAH: border ke kuning transparan */
+    border: 1px solid rgba(253, 224, 71, 0.15);
+}
+
+#translation-popup.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#translation-popup::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 20px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.5) transparent; 
+}
+
+/* ================================================================ */
+/* ============== INOVASI: DYNAMIC GLASS & SMOOTH REVEAL ========== */
+/* ================================================================ */
+
+/* --- INOVASI 1: EFEK 3D TILT & GLOW PADA HEADER --- */
+
+/* Membuat elemen di dalam header (judul & ikon) punya posisi 3D sendiri */
+.article-header h3,
+.article-header .collapse-icon {
+    transform: translateZ(25px); /* Mendorong elemen sedikit ke depan */
+    transition: transform 0.4s ease-out;
+}
+
+/* Mengaktifkan efek 3D saat kursor mendekat (hover) */
+.article-header:hover {
+    /* Miringkan panel sedikit dan perbesar ukurannya */
+    transform: perspective(1000px) rotateX(5deg) rotateY(-8deg) scale(1.03);
+    
+    /* Tambahkan efek sinar (glow) yang senada dengan tema */
+    box-shadow: 0 10px 30px -5px rgba(20, 184, 166, 0.3);
+}
+
+/* Memperhalus gerakan ikon saat panel miring */
+.article-header:hover .collapse-icon {
+    transform: translateZ(40px) rotate(-10deg);
+}
+
+
+/* --- INOVASI 2: ANIMASI MUNCUL UNTUK TEKS ARTIKEL --- */
+
+/* Definisikan animasi 'fadeInUp' */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Secara default, sembunyikan semua paragraf & gambar di dalam konten */
+.article-container .article-content-inner > * {
+    opacity: 0;
+}
+
+/* Saat artikel aktif, terapkan animasi pada semua elemen di dalamnya (paragraf & gambar) */
+.article-container.active .article-content-inner > * {
+    /* Gunakan animasi yang sudah kita definisikan */
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Bagian terbaik: Beri jeda animasi yang berbeda untuk setiap paragraf/gambar 
+   agar muncul satu per satu secara berurutan. Ini menciptakan efek air terjun (cascade).
+*/
+.article-container.active .article-content-inner > *:nth-child(1) {
+    animation-delay: 0.1s;
+}
+.article-container.active .article-content-inner > *:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.article-container.active .article-content-inner > *:nth-child(3) {
+    animation-delay: 0.3s;
+}
+.article-container.active .article-content-inner > *:nth-child(4) {
+    animation-delay: 0.4s;
+}
+.article-container.active .article-content-inner > *:nth-child(5) {
+    animation-delay: 0.5s;
+}
+/* Anda bisa melanjutkan pola ini jika artikel Anda memiliki lebih banyak paragraf */
