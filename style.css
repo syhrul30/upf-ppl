@@ -547,10 +547,11 @@ input[type="range"]::-moz-range-thumb:hover {
 
 /* Konten artikel sekunder saat aktif */
 .sub-article-container.active .article-content {
-    max-height: 50vh; 
+    max-height: 85vh; 
 }
 
 /* Jarak antar paragraf di artikel sekunder */
 .sub-article-container .article-content-inner p {
     margin-bottom: 0.8rem;
 }
+
