@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 2. Ini bisa diterapkan pada array `original` dan `translation`.
     const articlesData = [
         {
-            title: "0. Introduction",
+            title: "Introduction",
             original: [
                 "Introduction",
     "",
@@ -476,7 +476,17 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         },
         {
-            title: "1A. Why is there bacterial slime in my ice cream? The invention of UPF [PART 1: Wait, I’m eating what?]",
+            title: "PART 1: Wait, I’m eating what?",
+            original: [
+                
+            ],
+            translation: [
+                
+            ]
+        },
+        {
+            title: "1A. Why is there bacterial slime in my ice cream? The invention of UPF",
+            type: 'sub-article',
             original: [
                     "1. Why is there bacterial slime in my ice cream? The invention of UPF.",
     "",
@@ -816,6 +826,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "1B",
+            type: 'sub-article',
             original: [
                     "Paul then moved seamlessly on to the gums that I had noticed listed in the ingredients of Lyra’s ice cream.",
     "",
@@ -1165,6 +1176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "2A. I’d rather have five bowls of Coco Pops: the discovery of UPF",
+            type: 'sub-article',
             original: [
                 "2. I’d rather have five bowls of Coco Pops: the discovery of UPF.",
     "",
@@ -1722,6 +1734,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "2B",
+            type: 'sub-article',
             original: [
                 "Humans, like all animals, have evolved systems that control nutritional intake.",
     "As I read more, I started to wonder whether it’s the normal regulation of appetite that UPF disrupts, so that we keep eating, no matter what’s written on the box.",
@@ -2229,6 +2242,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "3A. Sure, ‘ultra-processed food’ sounds bad, but is it really a problem?",
+            type: 'sub-article',
             original: [
                 "3. Sure, ‘ultra-processed food’ sounds bad, but is it really a problem?",
     "",
@@ -2532,6 +2546,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "3B",
+            type: 'sub-article',
             original: [
                     "Moreover, the study’s participants didn’t have to pay for or prepare their food.",
     "It cost Hall’s team about $100 a week to provide 2,000 calories per day of UPF; for the unprocessed diet, the equivalent cost was more like $150.",
@@ -2905,6 +2920,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "4. (I can’t believe it’s not) coal butter: the ultimate UPF",
+            type: 'sub-article',
             original: [
                 "4. (I can’t believe it’s not) coal butter: the ultimate UPF.",
     "",
@@ -3253,7 +3269,17 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         },
         {
-            title: "5A. The three ages of eating [PART 2: But can’t I just control what I eat?]",
+            title: "PART 2: But can’t I just control what I eat?",
+            original: [
+                
+            ],
+            translation: [
+                
+            ]
+        },
+        {
+            title: "5A. The three ages of eating",
+            type: 'sub-article',
             original: [
                 "5. The three ages of eating.",
 "",
@@ -3681,6 +3707,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "5B",
+            type: 'sub-article',
             original: [
                   "Today, it’s widely accepted that cooking is crucial to what makes us human.",
   "This might seem obvious now, but just a few years ago, a significant number of anthropologists were still claiming that cooking was of purely cultural significance.",
@@ -4184,6 +4211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "6. How our bodies really manage calories",
+            type: 'sub-article',
             original: [
                 "6. How our bodies really manage calories.",
 "",
@@ -4571,6 +4599,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "7A. Why it isn’t about sugar…",
+            type: 'sub-article',
             original: [
                 "7. Why it isn’t about sugar…",
 "",
@@ -4816,6 +4845,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "7B",
+            type: 'sub-article',
             original: [
                 "My first and lasting impression was a warm one.",
 "People have said horrible things about Taubes online, but I found him decent and sincere.",
@@ -5187,6 +5217,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "8A. …or about exercise",
+            type: 'sub-article',
             original: [
                   "8. …or about exercise.",
   "",
@@ -5512,6 +5543,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "8B",
+            type: 'sub-article',
             original: [
                   "So, the doubly labelled water studies (and lots of other data) tell us that we are eating more.",
   "But what about that modelling by the Institute for Fiscal Studies showing that coal mining is (unsurprisingly) eight times more strenuous than office work?",
@@ -5791,6 +5823,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "9A. …or about willpower",
+            type: 'sub-article',
             original: [
                   "9. …or about willpower.",
   "",
@@ -6180,6 +6213,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "9B",
+            type: 'sub-article',
             original: [
                   "About halfway through my diet, I went for lunch with Rachel Batterham.",
   "We were ostensibly celebrating a successful grant application.",
@@ -6417,6 +6451,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "10A. How UPF hacks our brains",
+            type: 'sub-article',
             original: [
                   "10. How UPF hacks our brains.",
   "",
@@ -6776,6 +6811,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "10B",
+            type: 'sub-article',
             original: [
                   "However, for many of us, baked beans, even with some modified corn starch, are a healthy, affordable and easy way to make a main course.",
   "This is where we meet the limitations of NOVA, a system designed to look at dietary patterns rather than to evaluate individual foods.",
@@ -7232,7 +7268,17 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         },
         {
-            title: "11. UPF is pre-chewed [PART 3: Oh, so this is why I’m anxious and my belly aches!]",
+            title: "PART 3: Oh, so this is why I’m anxious and my belly aches!",
+            original: [
+                
+            ],
+            translation: [
+                
+            ]
+        },
+        {
+            title: "11. UPF is pre-chewed",
+            type: 'sub-article',
             original: [
                   "11. UPF is pre-chewed.",
   "",
@@ -7598,6 +7644,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "12A. UPF smells funny",
+            type: 'sub-article',
             original: [
                   "12. UPF smells funny.",
   "",
@@ -7833,6 +7880,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "12B",
+            type: 'sub-article',
             original: [
                   "Humans and animals will learn to love almost any flavour with a smell barcode that is associated with nutritional reward.[5]–[8]",
   "This was demonstrated in the 1970s in experiments in which rats drank sweet, zero-calorie, flavoured liquids at the same time as having either sugar or water infused directly into their stomachs.",
@@ -8088,6 +8136,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "13A. UPF tastes odd",
+            type: 'sub-article',
             original: [
                 "13. UPF tastes odd.",
   "",
@@ -8427,6 +8476,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "13B",
+            type: 'sub-article',
             original: [
                   "On 14 October 2012, future US president, Donald Trump, tweeted an observation about Diet Coke: ‘I have never seen a thin person drinking Diet Coke.’",
   "",
@@ -8676,6 +8726,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "14A. Additive anxiety",
+            type: 'sub-article',
             original: [
                   "14. Additive anxiety.",
   "",
@@ -8939,6 +8990,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "14B",
+            type: 'sub-article',
             original: [
                   "The equations that describe a donut and the equations that describe you and me are essentially the same: we’re all double-walled cylinders.",
   "The tube in the middle is your gut and it has branches to your ears, lungs and a few other places, all of which are coated in mucus, a complex mixture of water, proteins, glycoproteins.",
@@ -9243,7 +9295,17 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         },
         {
-            title: "15. Dysregulatory bodies [PART 4: But I already paid for this!]",
+            title: "PART 4: But I already paid for this!",
+            original: [
+                
+            ],
+            translation: [
+                
+            ]
+        },
+        {
+            title: "15. Dysregulatory bodies",
+            type: 'sub-article',
             original: [
                   "15. Dysregulatory bodies.",
   "",
@@ -9709,6 +9771,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "16A. UPF destroys traditional diets",
+            type: 'sub-article',
             original: [
                   "16. UPF destroys traditional diets.",
   "",
@@ -10068,6 +10131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "16B",
+            type: 'sub-article',
             original: [
                   "The companies that make UPF either displace traditional diets, as they are doing in Brazil, or absorb them and recreate them with new ingredients.",
   "I started to notice this early on in my diet.",
@@ -10349,6 +10413,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "17A. The true cost of Pringles",
+            type: 'sub-article',
             original: [
                   "17. The true cost of Pringles.",
   "",
@@ -10762,6 +10827,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "17B",
+            type: 'sub-article',
             original: [
                   "Furthermore, the current food system is not efficient, as discussed by a team of food engineers from Wageningen University in a 2016 paper.[23]",
   "The authors think about this problem in two nifty ways.",
@@ -11154,7 +11220,17 @@ document.addEventListener('DOMContentLoaded', function() {
             ]
         },
         {
-            title: "18A. UPF is designed to be overconsumed [PART 5: What the hell am I supposed to do then?]",
+            title: "PART 5: What the hell am I supposed to do then?",
+            original: [
+                
+            ],
+            translation: [
+                
+            ]
+        },
+        {
+            title: "18A. UPF is designed to be overconsumed",
+            type: 'sub-article',
             original: [
                   "18. UPF is designed to be overconsumed.",
   "",
@@ -11476,6 +11552,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "18B",
+            type: 'sub-article',
             original: [
                   "The next layer up is the universe of value-added ingredient companies, who make additives for texturing, flavourings and so on.",
   "They’re producing many of the additive substances that go into UPF that enable on-pack claims such as ‘low calorie’, ‘low fat’ or ‘low sugar’ and help food to last longer, taste better and be easier to eat.",
@@ -11869,6 +11946,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "19A. What we could ask governments to do",
+            type: 'sub-article',
             original: [
                   "19. What we could ask governments to do.",
   "",
@@ -12226,6 +12304,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "19B",
+            type: 'sub-article',
             original: [
                   "Meanwhile, back across the Atlantic, Diabetes UK lists Boots, Tesco and Abbott as corporate partners.[41]",
   "Cancer Research UK is funded by Compass, Roadchef, Slimming World, Tesco and Warburtons.[42]",
@@ -12537,6 +12616,7 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         {
             title: "20. What to do if you want to stop eating UPF",
+            type: 'sub-article',
             original: [
                   "20. What to do if you want to stop eating UPF.",
   "",
@@ -13092,16 +13172,42 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- ELEMEN HTML ---
     const articlesContainer = document.getElementById('articles-container');
     const popup = document.getElementById('translation-popup');
+    const fontAdjusterToggle = document.getElementById('font-adjuster-toggle');
+    const fontAdjusterContainer = document.getElementById('font-adjuster-container');
+    const fontSizeSlider = document.getElementById('font-size-slider');
 
-    // --- LOGIKA UTAMA ---
+    // --- LOGIKA PENGATUR UKURAN FONT (Tidak berubah) ---
+    articlesContainer.classList.add('font-size-3');
+    fontAdjusterToggle.addEventListener('click', () => {
+        fontAdjusterContainer.classList.toggle('visible');
+    });
+    fontSizeSlider.addEventListener('input', (event) => {
+        const newSize = event.target.value;
+        for (let i = 1; i <= 5; i++) {
+            articlesContainer.classList.remove(`font-size-${i}`);
+        }
+        articlesContainer.classList.add(`font-size-${newSize}`);
+    });
+
+    // ================================================================
+    // ================= LOGIKA INTI ARTIKEL (DISEDERHANAKAN) =========
+    // ================================================================
+
+    // Menggunakan perulangan forEach sederhana, bukan rekursif
     articlesData.forEach((articleData, articleIndex) => {
         const articleContainerEl = document.createElement('div');
-        articleContainerEl.className = 'article-container';
+        
+        // *** LOGIKA BARU: Tambahkan kelas berdasarkan penanda 'type' ***
+        if (articleData.type === 'sub-article') {
+            articleContainerEl.className = 'article-container sub-article-container';
+        } else {
+            articleContainerEl.className = 'article-container';
+        }
 
         const articleHeader = document.createElement('div');
         articleHeader.className = 'article-header';
         articleHeader.innerHTML = `
-            <h3 class="text-xl font-bold text-white">${articleData.title}</h3>
+            <h3 class="font-bold text-white">${articleData.title}</h3>
             <div class="collapse-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </div>
@@ -13116,8 +13222,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const textContainer = document.createElement('div');
         textContainer.className = 'text-lg leading-relaxed text-slate-300';
         
-        // --- LOGIKA YANG DIPERBARUI ---
-
         const createParagraph = (contentArray) => {
             if (contentArray.length === 0) return;
             const p = document.createElement('p');
@@ -13127,12 +13231,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 span.dataset.articleIndex = item.articleIndex;
                 span.dataset.segmentIndex = item.segmentIndex;
                 span.classList.add('original-text-segment');
-                
-                // PENAMBAHAN: Terapkan kelas italic dari Tailwind jika ada
                 if (item.style === 'italic') {
                     span.classList.add('italic');
                 }
-                
                 p.appendChild(span);
                 p.append(' ');
             });
@@ -13143,43 +13244,30 @@ document.addEventListener('DOMContentLoaded', function() {
         
         articleData.original.forEach((segment, segmentIndex) => {
             if (typeof segment === 'object' && segment !== null) {
-                // Jika objek gambar
                 if (segment.type === 'image') {
                     createParagraph(paragraphContent);
                     paragraphContent = [];
-
                     const img = document.createElement('img');
                     img.src = segment.src;
                     img.alt = segment.alt || 'Gambar dalam artikel';
                     img.className = 'w-full h-auto rounded-xl my-4';
                     textContainer.appendChild(img);
-                
-                // Jika objek teks (untuk styling)
                 } else if (segment.text) {
                     paragraphContent.push({
-                        text: segment.text,
-                        style: segment.style || 'normal',
-                        articleIndex: articleIndex,
-                        segmentIndex: segmentIndex
+                        text: segment.text, style: segment.style || 'normal', articleIndex: articleIndex, segmentIndex: segmentIndex
                     });
                 }
             } else if (segment === "") {
                 createParagraph(paragraphContent);
                 paragraphContent = [];
-            
-            // Jika string teks biasa
             } else if (typeof segment === 'string' && segment.length > 0) {
                 paragraphContent.push({
-                    text: segment,
-                    style: 'normal', // Gaya default
-                    articleIndex: articleIndex,
-                    segmentIndex: segmentIndex
+                    text: segment, style: 'normal', articleIndex: articleIndex, segmentIndex: segmentIndex
                 });
             }
         });
 
         createParagraph(paragraphContent);
-        // --- AKHIR LOGIKA YANG DIPERBARUI ---
 
         contentInner.appendChild(textContainer);
         articleContent.appendChild(contentInner);
@@ -13193,6 +13281,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // ================================================================
+    // ===================== LOGIKA POP-UP & EVENT ====================
+    // ================================================================
+
     function showPopup(target) {
         const articleIndex = target.dataset.articleIndex;
         const segmentIndex = target.dataset.segmentIndex;
@@ -13200,7 +13292,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const originalSegment = articlesData[articleIndex].original[segmentIndex];
         let translationSegment = articlesData[articleIndex].translation[segmentIndex];
         
-        // Ambil teks dari objek jika ada
         if (typeof translationSegment === 'object' && translationSegment.text) {
             translationSegment = translationSegment.text;
         }
@@ -13228,12 +13319,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (previouslySelected) {
                 previouslySelected.classList.remove('selected-text');
             }
-
             if (previouslySelected === target) {
                 hidePopup();
                 return;
             }
-
             target.classList.add('selected-text');
             showPopup(target);
         }
@@ -13246,6 +13335,9 @@ document.addEventListener('DOMContentLoaded', function() {
              if (previouslySelected) {
                  previouslySelected.classList.remove('selected-text');
              }
+        }
+        if (!event.target.closest('#font-adjuster-container') && !event.target.closest('#font-adjuster-toggle')) {
+            fontAdjusterContainer.classList.remove('visible');
         }
     });
 });
