@@ -292,3 +292,265 @@ body {
     animation-delay: 0.5s;
 }
 /* Anda bisa melanjutkan pola ini jika artikel Anda memiliki lebih banyak paragraf */
+
+
+
+/* ================================================================ */
+/* ============ GAYA BARU: KONTROL UKURAN FONT ==================== */
+/* ================================================================ */
+.settings-button {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem; /* Memberi sedikit jarak dari tepi */
+    z-index: 100;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background: rgba(50, 10, 25, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fda4af;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.settings-button:hover {
+    background: rgba(50, 10, 25, 0.6);
+    transform: rotate(90deg);
+}
+
+.settings-panel {
+    position: fixed;
+    top: 4.2rem; /* Tepat di bawah tombol setting */
+    right: 1.5rem;
+    z-index: 99;
+    background: rgba(50, 10, 25, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.settings-panel.visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.font-sizer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #fda4af;
+}
+
+.font-sizer .large-a {
+    font-size: 1.25rem; /* Membuat 'A' besar lebih menonjol */
+}
+
+/* Kustomisasi Slider */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 120px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #e11d48;
+    border-radius: 50%;
+    border: 2px solid #fff1f2;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #e11d48;
+    border-radius: 50%;
+    border: 2px solid #fff1f2;
+}
+
+
+/* ================================================================ */
+/* ============== FITUR PENGATUR UKURAN FONT (TEMA TOSKA) ========= */
+/* ================================================================ */
+
+/* Tombol untuk membuka panel */
+#font-adjuster-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1.5rem;
+    z-index: 1001; /* Harus di atas segalanya */
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    /* BERUBAH: Latar belakang ke toska gelap transparan */
+    background: rgba(15, 50, 45, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* BERUBAH: Warna ikon ke toska muda */
+    color: #5eead4;
+    transition: all 0.2s ease-in-out;
+}
+
+#font-adjuster-toggle:hover {
+    /* BERUBAH: Latar belakang hover ke toska lebih pekat */
+    background: rgba(15, 50, 45, 0.6);
+    /* BERUBAH: Warna ikon hover ke toska sangat muda */
+    color: #ccfbf1;
+}
+
+/* Panel pengatur yang tersembunyi */
+#font-adjuster-container {
+    position: fixed;
+    top: 4.5rem; /* Tepat di bawah tombol */
+    right: 1.5rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    
+    /* BERUBAH: Efek glassmorphism ke tema toska */
+    background: rgba(15, 50, 45, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+    /* Sembunyikan secara default */
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#font-adjuster-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Ikon huruf 'A' */
+.font-adjuster-icon {
+    /* BERUBAH: Warna ikon ke toska muda */
+    color: #5eead4;
+    font-weight: 600;
+}
+
+/* Kustomisasi Slider */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 150px;
+    height: 6px;
+    /* BERUBAH: Latar slider ke toska gelap */
+    background: rgba(15, 50, 45, 0.5);
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Thumb (Gagang) Slider untuk Chrome/Safari */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    /* BERUBAH: Warna gagang ke toska terang */
+    background: #14b8a6;
+    border-radius: 50%;
+    /* BERUBAH: Warna border gagang */
+    border: 2px solid #f0fdfa;
+    transition: background-color 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    /* BERUBAH: Warna hover gagang */
+    background-color: #2dd4bf;
+}
+
+/* Thumb (Gagang) Slider untuk Firefox */
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    /* BERUBAH: Warna gagang ke toska terang */
+    background: #14b8a6;
+    border-radius: 50%;
+    /* BERUBAH: Warna border gagang */
+    border: 2px solid #f0fdfa;
+    transition: background-color 0.2s ease;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    /* BERUBAH: Warna hover gagang */
+    background-color: #2dd4bf;
+}
+
+
+/* Kelas untuk Ukuran Font Konten Artikel */
+/* Target: .text-lg di dalam kontainer yang memiliki kelas font-size-X */
+#articles-container.font-size-1 .text-lg { font-size: 0.9rem; line-height: 1.5rem; }
+#articles-container.font-size-2 .text-lg { font-size: 1.0rem; line-height: 1.65rem; }
+#articles-container.font-size-3 .text-lg { font-size: 1.125rem; line-height: 1.75rem; } /* Ukuran Default */
+#articles-container.font-size-4 .text-lg { font-size: 1.25rem; line-height: 1.9rem; }
+#articles-container.font-size-5 .text-lg { font-size: 1.4rem; line-height: 2.1rem; }
+
+
+/* ================================================================ */
+/* ============= GAYA UNTUK ARTIKEL TIPE SEKUNDER ================= */
+/* ================================================================ */
+
+/* Kontainer utama artikel sekunder */
+.sub-article-container {
+    margin-left: 1.5rem;
+    /* Lebar dihitung 100% dikurangi indentasi margin kiri */
+    width: calc(100% - 1.5rem); 
+    margin-top: 1.5rem;
+}
+
+/* Header artikel sekunder yang lebih kecil */
+.sub-article-container .article-header {
+    padding: 0.75rem 1.25rem; /* Padding lebih kecil */
+    background: rgba(49, 50, 10, 0.4); 
+}
+
+/* Judul header artikel sekunder yang lebih kecil */
+.sub-article-container .article-header h3 {
+    font-size: 1rem; /* Ukuran font lebih kecil */
+    font-weight: 500;
+    color: #ebf871; /* Warna sedikit lebih redup */
+}
+
+/* Ikon collapse artikel sekunder */
+.sub-article-container .article-header .collapse-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* Konten artikel sekunder saat aktif */
+.sub-article-container.active .article-content {
+    max-height: 50vh; 
+}
+
+/* Jarak antar paragraf di artikel sekunder */
+.sub-article-container .article-content-inner p {
+    margin-bottom: 0.8rem;
+}
