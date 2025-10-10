@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,18 +12,25 @@
 </head>
 <body class="bg-black text-slate-300">
 
+    <div id="progress-bar"></div>
+
     <div class="background-shapes">
         <div class="shape1"></div>
         <div class="shape2"></div>
     </div>
 
-     <button id="font-adjuster-toggle" title="Ubah Ukuran Font">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 7V4h16v3"/>
-            <path d="M9 20h6"/>
-            <path d="M12 4v16"/>
-        </svg>
-    </button>
+    <div class="ui-controls">
+        <button id="vocab-toggle-button" title="Lihat Bookmark">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+        </button>
+        <button id="font-adjuster-toggle" title="Ubah Ukuran Font">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 7V4h16v3"/>
+                <path d="M9 20h6"/>
+                <path d="M12 4v16"/>
+            </svg>
+        </button>
+    </div>
 
     <div id="font-adjuster-container">
         <span class="font-adjuster-icon text-sm">A</span>
@@ -31,29 +39,33 @@
     </div>
 
     <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl relative z-10">
-
         <header class="text-center mb-12">
             <img src='https://i.ibb.co.com/Q7S9GLv4/sampul-upf.webp' alt="Sampul Buku" class="w-48 mx-auto rounded-xl mb-6">
-            
             <h1 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-teal-400 to-yellow-300 bg-clip-text text-transparent">
                  Ultra-Processed People: The Science Behind Food That Isn't Food
             </h1>
             <p class="text-teal-300 mt-2">Chris van Tulleken</p>
         </header>
 
-        <main id="articles-container" class="space-y-4">
-            </main>
+        <main id="articles-container" class="space-y-4"></main>
         
         <footer class="text-center mt-12 text-teal-300">
             <p> part1, 4 by Grok3 | part2, 5 by Gemini2.5Pro | part3 by DeepSeek</p>
             <p> * * *</p>
             <p>&copy; Syhr0el 2025 Bilingual Reader. Dibuat untuk mempermudah membaca.</p>
         </footer>
-
     </div>
 
-    <div id="translation-popup">
+    <div id="translation-popup"></div>
+
+    <div id="vocab-sidebar">
+        <div class="sidebar-header">
+            <h3 class="text-lg font-semibold text-teal-100">Bookmark</h3>
+            <button id="clear-vocab-button" title="Hapus Semua">Hapus Semua</button>
         </div>
+        <ul id="vocab-list">
+            </ul>
+    </div>
 
     <script src="script.js"></script>
 </body>
