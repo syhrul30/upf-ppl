@@ -1,12 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // --- DATA ARTIKEL ---
-    // CARA MENAMBAHKAN GAYA ITALIC:
-    // 1. Ubah string kalimat yang diinginkan menjadi sebuah objek:
-    //    { text: 'Teks kalimat Anda.', style: 'italic' }
-    // 2. Ini bisa diterapkan pada array `original` dan `translation`.
     const articlesData = [
-        {
+       {
             title: "Introduction",
             original: [
                 "Introduction",
@@ -13135,73 +13131,47 @@ document.addEventListener('DOMContentLoaded', function() {
   "Ia benci hal-hal seperti ini, tetapi ia adalah orang terbaik yang pernah saya temui."
             ]
         }
-        
     ];
-
-    /*
-        {
-            title: "Artikel dengan Gaya Italic",
-            original: [
-                "Kalimat ini adalah teks biasa.",
-                { text: 'Sedangkan kalimat ini akan ditampilkan dalam gaya miring (italic).', style: 'italic' },
-                "Kita bisa kembali ke teks normal setelah itu.",
-                "",
-                { type: 'image', src: 'https://placehold.co/600x400/e11d48/fff1f2?text=Gambar+Contoh', alt: 'Sebuah gambar contoh' },
-                "Struktur untuk gambar dan paragraf baru tetap sama seperti sebelumnya."
-            ],
-            translation: [
-                "This sentence is normal text.",
-                "Whereas this sentence will be displayed in an italic style",
-                "We can return to normal text after that.",
-                "",
-                "", 
-                "The structure for images and new paragraphs remains the same as before."
-            ]
-        },
-        {
-            title: "Artikel Kedua",
-            original: [
-                "Artikel ini tidak memiliki gaya khusus, untuk menunjukkan kompatibilitas."
-            ],
-            translation: [
-                "This article has no special styling, to show compatibility."
-            ]
-        }
-    */
   
     // --- ELEMEN HTML ---
     const articlesContainer = document.getElementById('articles-container');
     const popup = document.getElementById('translation-popup');
+    const progressBar = document.getElementById('progress-bar');
     const fontAdjusterToggle = document.getElementById('font-adjuster-toggle');
     const fontAdjusterContainer = document.getElementById('font-adjuster-container');
     const fontSizeSlider = document.getElementById('font-size-slider');
+    const vocabToggleButton = document.getElementById('vocab-toggle-button');
+    const vocabSidebar = document.getElementById('vocab-sidebar');
+    const vocabList = document.getElementById('vocab-list');
+    const clearVocabButton = document.getElementById('clear-vocab-button');
 
-    // --- LOGIKA PENGATUR UKURAN FONT (Tidak berubah) ---
-    articlesContainer.classList.add('font-size-3');
-    fontAdjusterToggle.addEventListener('click', () => {
-        fontAdjusterContainer.classList.toggle('visible');
-    });
-    fontSizeSlider.addEventListener('input', (event) => {
-        const newSize = event.target.value;
+    // ================================================================
+    // ================ INISIALISASI DARI LOCALSTORAGE ================
+    // ================================================================
+    const savedFontSize = localStorage.getItem('fontSize') || '3';
+    const savedActiveArticles = JSON.parse(localStorage.getItem('activeArticles')) || [];
+    let vocabulary = JSON.parse(localStorage.getItem('vocabulary')) || [];
+
+    // --- FUNGSI FONT SIZE ---
+    function applyFontSize(size) {
         for (let i = 1; i <= 5; i++) {
             articlesContainer.classList.remove(`font-size-${i}`);
         }
-        articlesContainer.classList.add(`font-size-${newSize}`);
-    });
+        articlesContainer.classList.add(`font-size-${size}`);
+        fontSizeSlider.value = size;
+    }
+    applyFontSize(savedFontSize);
 
     // ================================================================
-    // ================= LOGIKA INTI ARTIKEL (DISEDERHANAKAN) =========
+    // ================= LOGIKA INTI RENDER ARTIKEL ===================
     // ================================================================
-
-    // Menggunakan perulangan forEach sederhana, bukan rekursif
     articlesData.forEach((articleData, articleIndex) => {
         const articleContainerEl = document.createElement('div');
-        
-        // *** LOGIKA BARU: Tambahkan kelas berdasarkan penanda 'type' ***
-        if (articleData.type === 'sub-article') {
-            articleContainerEl.className = 'article-container sub-article-container';
-        } else {
-            articleContainerEl.className = 'article-container';
+        articleContainerEl.className = articleData.type === 'sub-article' ? 'article-container sub-article-container' : 'article-container';
+        articleContainerEl.dataset.articleIndex = articleIndex; 
+
+        if (savedActiveArticles.includes(articleIndex)) {
+            articleContainerEl.classList.add('active');
         }
 
         const articleHeader = document.createElement('div');
@@ -13215,10 +13185,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const articleContent = document.createElement('div');
         articleContent.className = 'article-content';
-
         const contentInner = document.createElement('div');
         contentInner.className = 'article-content-inner';
-        
         const textContainer = document.createElement('div');
         textContainer.className = 'text-lg leading-relaxed text-slate-300';
         
@@ -13241,32 +13209,24 @@ document.addEventListener('DOMContentLoaded', function() {
         };
 
         let paragraphContent = [];
-        
         articleData.original.forEach((segment, segmentIndex) => {
             if (typeof segment === 'object' && segment !== null) {
                 if (segment.type === 'image') {
-                    createParagraph(paragraphContent);
-                    paragraphContent = [];
+                    createParagraph(paragraphContent); paragraphContent = [];
                     const img = document.createElement('img');
                     img.src = segment.src;
                     img.alt = segment.alt || 'Gambar dalam artikel';
                     img.className = 'w-full h-auto rounded-xl my-4';
                     textContainer.appendChild(img);
                 } else if (segment.text) {
-                    paragraphContent.push({
-                        text: segment.text, style: segment.style || 'normal', articleIndex: articleIndex, segmentIndex: segmentIndex
-                    });
+                    paragraphContent.push({ text: segment.text, style: segment.style || 'normal', articleIndex: articleIndex, segmentIndex: segmentIndex });
                 }
             } else if (segment === "") {
-                createParagraph(paragraphContent);
-                paragraphContent = [];
+                createParagraph(paragraphContent); paragraphContent = [];
             } else if (typeof segment === 'string' && segment.length > 0) {
-                paragraphContent.push({
-                    text: segment, style: 'normal', articleIndex: articleIndex, segmentIndex: segmentIndex
-                });
+                paragraphContent.push({ text: segment, style: 'normal', articleIndex: articleIndex, segmentIndex: segmentIndex });
             }
         });
-
         createParagraph(paragraphContent);
 
         contentInner.appendChild(textContainer);
@@ -13277,32 +13237,55 @@ document.addEventListener('DOMContentLoaded', function() {
         articlesContainer.appendChild(articleContainerEl);
 
         articleHeader.addEventListener('click', () => {
-            articleContainerEl.classList.toggle('active');
+            const isActive = articleContainerEl.classList.toggle('active');
+            const currentActive = JSON.parse(localStorage.getItem('activeArticles')) || [];
+            if (isActive) {
+                if (!currentActive.includes(articleIndex)) currentActive.push(articleIndex);
+            } else {
+                const indexToRemove = currentActive.indexOf(articleIndex);
+                if (indexToRemove > -1) currentActive.splice(indexToRemove, 1);
+            }
+            localStorage.setItem('activeArticles', JSON.stringify(currentActive));
         });
     });
 
-    // ================================================================
-    // ===================== LOGIKA POP-UP & EVENT ====================
-    // ================================================================
+    // --- ANIMASI SCROLL REVEAL ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.article-container').forEach(articleEl => observer.observe(articleEl));
 
+    // ================================================================
+    // ================= LOGIKA POP-UP (DI-UPGRADE) ===================
+    // ================================================================
     function showPopup(target) {
         const articleIndex = target.dataset.articleIndex;
         const segmentIndex = target.dataset.segmentIndex;
-        
-        const originalSegment = articlesData[articleIndex].original[segmentIndex];
+        let originalSegment = articlesData[articleIndex].original[segmentIndex];
         let translationSegment = articlesData[articleIndex].translation[segmentIndex];
         
-        if (typeof translationSegment === 'object' && translationSegment.text) {
-            translationSegment = translationSegment.text;
-        }
+        if (typeof originalSegment === 'object') originalSegment = originalSegment.text;
+        if (typeof translationSegment === 'object') translationSegment = translationSegment.text;
 
-        if (!translationSegment) {
-            hidePopup();
-            return;
-        }
+        if (!translationSegment) { hidePopup(); return; }
 
+        const isAlreadyAdded = vocabulary.some(item => item.original === originalSegment);
+        const addedClass = isAlreadyAdded ? 'added' : '';
+        const buttonText = isAlreadyAdded ? '✔' : '+';
+
+        popup.innerHTML = `
+            <span>${translationSegment}</span>
+            <button class="add-vocab-btn ${addedClass}" title="Tambah ke Bookmark" data-original="${originalSegment}" data-translation="${translationSegment}" data-article-index="${articleIndex}">
+                ${buttonText}
+            </button>
+        `;
+        
         const rect = target.getBoundingClientRect();
-        popup.textContent = translationSegment;
         popup.style.top = `${window.scrollY + rect.bottom}px`;
         popup.style.left = `${window.scrollX + rect.left}px`;
         popup.classList.add('visible');
@@ -13312,19 +13295,59 @@ document.addEventListener('DOMContentLoaded', function() {
         popup.classList.remove('visible');
     }
 
+    // ================================================================
+    // =================== FUNGSI-FUNGSI BOOKMARK =====================
+    // ================================================================
+    function renderVocabulary() {
+        vocabList.innerHTML = '';
+        if (vocabulary.length === 0) {
+            vocabList.innerHTML = '<li class="empty-vocab-message">Belum ada bookmark.</li>';
+            return;
+        }
+        vocabulary.forEach((item, index) => {
+            const listItem = document.createElement('li');
+            listItem.className = 'vocab-item';
+            listItem.dataset.articleIndex = item.articleIndex;
+            listItem.dataset.vocabIndex = index;
+            listItem.innerHTML = `
+                <div class="vocab-item-original">${item.original}</div>
+                <div class="vocab-item-translation">${item.translation}</div>
+                <div class="vocab-item-source">Sumber: ${item.title}</div>
+                <button class="delete-vocab-btn" title="Hapus Bookmark">&times;</button>
+            `;
+            vocabList.appendChild(listItem);
+        });
+    }
+
+    function addVocabulary(original, translation, articleIndex) {
+        if (vocabulary.some(item => item.original === original)) return;
+        vocabulary.unshift({ original, translation, title: articlesData[articleIndex].title, articleIndex });
+        localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
+        renderVocabulary();
+    }
+    
+    renderVocabulary();
+
+    // ================================================================
+    // ===================== SEMUA EVENT LISTENER =====================
+    // ================================================================
     articlesContainer.addEventListener('click', function(event) {
         const target = event.target;
         if (target.classList.contains('original-text-segment')) {
             const previouslySelected = document.querySelector('.selected-text');
-            if (previouslySelected) {
-                previouslySelected.classList.remove('selected-text');
-            }
-            if (previouslySelected === target) {
-                hidePopup();
-                return;
-            }
+            if (previouslySelected) previouslySelected.classList.remove('selected-text');
+            if (previouslySelected === target) { hidePopup(); return; }
             target.classList.add('selected-text');
             showPopup(target);
+        }
+    });
+
+    popup.addEventListener('click', function(event){
+        const target = event.target.closest('.add-vocab-btn');
+        if(target) {
+            addVocabulary(target.dataset.original, target.dataset.translation, target.dataset.articleIndex);
+            target.classList.add('added');
+            target.textContent = '✔';
         }
     });
 
@@ -13332,12 +13355,54 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!event.target.closest('.article-container') && !event.target.closest('#translation-popup')) {
              hidePopup();
              const previouslySelected = document.querySelector('.selected-text');
-             if (previouslySelected) {
-                 previouslySelected.classList.remove('selected-text');
-             }
+             if (previouslySelected) previouslySelected.classList.remove('selected-text');
         }
         if (!event.target.closest('#font-adjuster-container') && !event.target.closest('#font-adjuster-toggle')) {
             fontAdjusterContainer.classList.remove('visible');
+        }
+        if (!event.target.closest('#vocab-sidebar') && !event.target.closest('#vocab-toggle-button')) {
+            vocabSidebar.classList.remove('visible');
+        }
+    });
+
+    window.addEventListener('scroll', () => {
+        const scrollTop = document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        progressBar.style.width = `${(scrollTop / scrollHeight) * 100}%`;
+    });
+
+    fontAdjusterToggle.addEventListener('click', (e) => { e.stopPropagation(); fontAdjusterContainer.classList.toggle('visible'); });
+    fontSizeSlider.addEventListener('input', (e) => {
+        applyFontSize(e.target.value);
+        localStorage.setItem('fontSize', e.target.value);
+    });
+
+    vocabToggleButton.addEventListener('click', (e) => { e.stopPropagation(); vocabSidebar.classList.toggle('visible'); });
+    clearVocabButton.addEventListener('click', () => {
+        if (confirm('Anda yakin ingin menghapus semua bookmark?')) {
+            vocabulary = [];
+            localStorage.removeItem('vocabulary');
+            renderVocabulary();
+        }
+    });
+
+    vocabList.addEventListener('click', (event) => {
+        const vocabItem = event.target.closest('.vocab-item');
+        if (!vocabItem) return;
+        if (event.target.classList.contains('delete-vocab-btn')) {
+            const vocabIndex = parseInt(vocabItem.dataset.vocabIndex);
+            vocabulary.splice(vocabIndex, 1);
+            localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
+            renderVocabulary();
+        } else {
+            const articleIndex = vocabItem.dataset.articleIndex;
+            const targetArticle = document.querySelector(`.article-container[data-article-index="${articleIndex}"]`);
+            if(targetArticle) {
+                targetArticle.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                targetArticle.classList.add('article-highlight');
+                setTimeout(() => targetArticle.classList.remove('article-highlight'), 2000);
+            }
+            vocabSidebar.classList.remove('visible');
         }
     });
 });
