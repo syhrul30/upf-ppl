@@ -26,7 +26,6 @@ body {
 .shape1 {
     width: 500px;
     height: 500px;
-    /* BERUBAH: gradasi dari rose ke toska terang */
     background: radial-gradient(circle, rgba(20, 184, 166, 0.4) 0%, rgba(0,0,0,0) 70%);
     top: -10%;
     left: -10%;
@@ -36,7 +35,6 @@ body {
 .shape2 {
     width: 600px;
     height: 600px;
-    /* BERUBAH: gradasi dari dark rose ke kuning pucat */
     background: radial-gradient(circle, rgba(253, 224, 71, 0.2) 0%, rgba(0,0,0,0) 70%);
     bottom: -15%;
     right: -15%;
@@ -55,503 +53,141 @@ body {
 
 
 /* ================================================================ */
+/* ============ GAYA BARU: PROGRES BAR & SCROLL REVEAL ============ */
+/* ================================================================ */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #14b8a6, #2dd4bf, #fde047);
+    width: 0%;
+    z-index: 9999;
+    transition: width 0.1s linear;
+}
+
+.article-container {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.article-container.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ================================================================ */
+/* ========== GAYA BARU: SOROTAN ARTIKEL (HIGHLIGHT) ============== */
+/* ================================================================ */
+@keyframes temporary-highlight {
+    0% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.5); }
+    50% { box-shadow: 0 0 25px 8px rgba(20, 184, 166, 0.3); }
+    100% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0); }
+}
+
+.article-highlight {
+    animation: temporary-highlight 2s ease-out;
+}
+
+
+/* ================================================================ */
 /* ================= EFEK KACA (GLASSMORPHISM) ==================== */
 /* ================================================================ */
-
-/* Header artikel */
-.article-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    padding: 1rem 1.5rem;
-    border-radius: 0.75rem;
-    transition: all 0.3s ease;
-    /* BERUBAH: warna teks dari pink muda ke toska muda */
-    color: #5eead4;
-    /* BERUBAH: latar belakang dari ungu gelap ke toska gelap */
-    background: rgba(15, 50, 45, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    position: sticky;
-    top: 1rem;
-    z-index: 10;
-}
-
-.article-header h3 {
-     /* BERUBAH: warna teks dari pink sangat muda ke toska sangat muda */
-     color: #ccfbf1;
-}
-
-/* Konten artikel */
-.article-content {
-    /* BERUBAH: latar belakang dari ungu gelap ke toska gelap */
-    background: rgba(15, 50, 45, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 0px solid rgba(255, 255, 255, 0.1);
-    border-top: none;
-    border-radius: 0 0 0.75rem 0.75rem;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.7s ease-in-out, padding 0.5s ease-in-out;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-.article-content-inner p {
-    margin-bottom: 1rem;
-    text-align: justify;
-    text-indent: 2em;
-}
-.article-content-inner p:last-child {
-    margin-bottom: 0;
-}
-
-/* Saat artikel aktif (terbuka) */
-.article-container.active .article-header {
-    border-radius: 0.75rem 0.75rem 0 0;
-    /* BERUBAH: latar belakang ke toska gelap (lebih pekat) */
-    background: rgba(15, 50, 45, 0.5);
-}
-
-.article-container.active .article-content {
-    max-height: 90vh; 
-    overflow-y: auto; 
-    padding-top: 1.5rem;
-    padding-bottom: 1.5rem;
-}
-
-.collapse-icon svg {
-    transition: transform 0.3s ease-in-out;
-    /* BERUBAH: stroke ikon dari pink muda ke toska muda */
-    stroke: #5eead4;
-}
-
-.article-container.active .collapse-icon svg {
-    transform: rotate(180deg);
-}
-
-/* GAYA SCROLLBAR KUSTOM */
-.article-content::-webkit-scrollbar {
-    width: 8px;
-}
-
-.article-content::-webkit-scrollbar-track {
-    /* BERUBAH: track dari ungu transparan ke toska transparan */
-    background: rgba(15, 50, 45, 0.1);
-    border-radius: 10px;
-}
-
-.article-content::-webkit-scrollbar-thumb {
-    /* BERUBAH: thumb dari rose terang ke toska terang */
-    background-color: #14b8a6;
-    border-radius: 10px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-}
-
-.article-content::-webkit-scrollbar-thumb:hover {
-    /* BERUBAH: hover thumb ke toska lebih muda */
-    background-color: #2dd4bf;
-}
+.article-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 1rem 1.5rem; border-radius: 0.75rem; transition: all 0.3s ease; color: #5eead4; background: rgba(15, 50, 45, 0.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); position: sticky; top: 1rem; z-index: 10; }
+.article-header h3 { color: #ccfbf1; }
+.article-content { background: rgba(15, 50, 45, 0.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 0px solid rgba(255, 255, 255, 0.1); border-top: none; border-radius: 0 0 0.75rem 0.75rem; max-height: 0; overflow: hidden; transition: max-height 0.7s ease-in-out, padding 0.5s ease-in-out; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0; padding-bottom: 0; }
+.article-content-inner p { margin-bottom: 1rem; text-align: justify; text-indent: 2em; }
+.article-content-inner p:last-child { margin-bottom: 0; }
+.article-container.active .article-header { border-radius: 0.75rem 0.75rem 0 0; background: rgba(15, 50, 45, 0.5); }
+.article-container.active .article-content { max-height: 90vh; overflow-y: auto; padding-top: 1.5rem; padding-bottom: 1.5rem; }
+.collapse-icon svg { transition: transform 0.3s ease-in-out; stroke: #5eead4; }
+.article-container.active .collapse-icon svg { transform: rotate(180deg); }
+.article-content::-webkit-scrollbar { width: 8px; }
+.article-content::-webkit-scrollbar-track { background: rgba(15, 50, 45, 0.1); border-radius: 10px; }
+.article-content::-webkit-scrollbar-thumb { background-color: #14b8a6; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
+.article-content::-webkit-scrollbar-thumb:hover { background-color: #2dd4bf; }
 
 
 /* ================================================================ */
-/* ======================= GAYA POP-UP ============================ */
+/* ============= GAYA POP-UP (DENGAN TOMBOL BOOKMARK) ============= */
 /* ================================================================ */
-
-.original-text-segment {
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-    padding: 2px 4px;
-    border-radius: 6px;
-}
-
-.original-text-segment:hover {
-    /* BERUBAH: hover dari rose transparan ke toska transparan */
-    background-color: rgba(20, 184, 166, 0.2);
-}
-
-.selected-text {
-    /* BERUBAH: latar dari rose terang ke toska terang */
-    background-color: #14b8a6;
-    /* BERUBAH: warna teks dari putih kemerahan ke putih kebiruan/toska */
-    color: #f0fdfa;
-    font-weight: 500;
-}
-
-#translation-popup {
-    position: absolute;
-    z-index: 20;
-    transform: translateY(8px);
-    transition: opacity 0.2s ease-in-out;
-    pointer-events: none;
-    opacity: 0;
-    padding: 0.75rem;
-    border-radius: 0.5rem;
-    max-width: 500px;
-    font-size: 0.9rem;
-    /* BERUBAH: warna teks ke kuning pucat */
-    color: #fef08a;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    /* BERUBAH: border ke kuning transparan */
-    border: 1px solid rgba(253, 224, 71, 0.15);
-}
-
-#translation-popup.visible {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-#translation-popup::before {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 20px;
-    border-width: 8px;
-    border-style: solid;
-    border-color: transparent transparent rgba(0, 0, 0, 0.5) transparent; 
-}
+.original-text-segment { cursor: pointer; transition: background-color 0.2s ease-in-out; padding: 2px 4px; border-radius: 6px; }
+.original-text-segment:hover { background-color: rgba(20, 184, 166, 0.2); }
+.selected-text { background-color: #14b8a6; color: #f0fdfa; font-weight: 500; }
+#translation-popup { display: flex; align-items: center; gap: 0.75rem; position: absolute; z-index: 20; transform: translateY(8px); transition: opacity 0.2s ease-in-out; pointer-events: none; opacity: 0; padding: 0.75rem; border-radius: 0.5rem; max-width: 500px; font-size: 0.9rem; color: #fef08a; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(253, 224, 71, 0.15); }
+#translation-popup.visible { opacity: 1; pointer-events: auto; }
+#translation-popup::before { content: ''; position: absolute; bottom: 100%; left: 20px; border-width: 8px; border-style: solid; border-color: transparent transparent rgba(0, 0, 0, 0.5) transparent; }
+.add-vocab-btn { background-color: rgba(253, 224, 71, 0.2); border: 1px solid rgba(253, 224, 71, 0.4); color: #fef08a; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: all 0.2s ease; flex-shrink: 0; }
+.add-vocab-btn:hover { background-color: rgba(253, 224, 71, 0.4); color: white; }
+.add-vocab-btn.added { background-color: rgba(20, 184, 166, 0.5); color: white; border-color: rgba(20, 184, 166, 0.7); }
 
 /* ================================================================ */
 /* ============== INOVASI: DYNAMIC GLASS & SMOOTH REVEAL ========== */
 /* ================================================================ */
-
-/* --- INOVASI 1: EFEK 3D TILT & GLOW PADA HEADER --- */
-
-/* Membuat elemen di dalam header (judul & ikon) punya posisi 3D sendiri */
-.article-header h3,
-.article-header .collapse-icon {
-    transform: translateZ(25px); /* Mendorong elemen sedikit ke depan */
-    transition: transform 0.4s ease-out;
-}
-
-/* Mengaktifkan efek 3D saat kursor mendekat (hover) */
-.article-header:hover {
-    /* Miringkan panel sedikit dan perbesar ukurannya */
-    transform: perspective(1000px) rotateX(5deg) rotateY(-8deg) scale(1.03);
-    
-    /* Tambahkan efek sinar (glow) yang senada dengan tema */
-    box-shadow: 0 10px 30px -5px rgba(20, 184, 166, 0.3);
-}
-
-/* Memperhalus gerakan ikon saat panel miring */
-.article-header:hover .collapse-icon {
-    transform: translateZ(40px) rotate(-10deg);
-}
-
-
-/* --- INOVASI 2: ANIMASI MUNCUL UNTUK TEKS ARTIKEL --- */
-
-/* Definisikan animasi 'fadeInUp' */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Secara default, sembunyikan semua paragraf & gambar di dalam konten */
-.article-container .article-content-inner > * {
-    opacity: 0;
-}
-
-/* Saat artikel aktif, terapkan animasi pada semua elemen di dalamnya (paragraf & gambar) */
-.article-container.active .article-content-inner > * {
-    /* Gunakan animasi yang sudah kita definisikan */
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Bagian terbaik: Beri jeda animasi yang berbeda untuk setiap paragraf/gambar 
-   agar muncul satu per satu secara berurutan. Ini menciptakan efek air terjun (cascade).
-*/
-.article-container.active .article-content-inner > *:nth-child(1) {
-    animation-delay: 0.1s;
-}
-.article-container.active .article-content-inner > *:nth-child(2) {
-    animation-delay: 0.2s;
-}
-.article-container.active .article-content-inner > *:nth-child(3) {
-    animation-delay: 0.3s;
-}
-.article-container.active .article-content-inner > *:nth-child(4) {
-    animation-delay: 0.4s;
-}
-.article-container.active .article-content-inner > *:nth-child(5) {
-    animation-delay: 0.5s;
-}
-/* Anda bisa melanjutkan pola ini jika artikel Anda memiliki lebih banyak paragraf */
-
+.article-header h3, .article-header .collapse-icon { transform: translateZ(25px); transition: transform 0.4s ease-out; }
+.article-header:hover { transform: perspective(1000px) rotateX(5deg) rotateY(-8deg) scale(1.03); box-shadow: 0 10px 30px -5px rgba(20, 184, 166, 0.3); }
+.article-header:hover .collapse-icon { transform: translateZ(40px) rotate(-10deg); }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.article-container .article-content-inner > * { opacity: 0; }
+.article-container.active .article-content-inner > * { animation: fadeInUp 0.6s ease-out forwards; }
+.article-container.active .article-content-inner > *:nth-child(1) { animation-delay: 0.1s; }
+.article-container.active .article-content-inner > *:nth-child(2) { animation-delay: 0.2s; }
+.article-container.active .article-content-inner > *:nth-child(3) { animation-delay: 0.3s; }
+.article-container.active .article-content-inner > *:nth-child(4) { animation-delay: 0.4s; }
+.article-container.active .article-content-inner > *:nth-child(5) { animation-delay: 0.5s; }
 
 
 /* ================================================================ */
-/* ============ GAYA BARU: KONTROL UKURAN FONT ==================== */
+/* ================= GAYA BARU: KONTROL UI & FONT ================= */
 /* ================================================================ */
-.settings-button {
-    position: fixed;
-    top: 1rem;
-    right: 1.5rem; /* Memberi sedikit jarak dari tepi */
-    z-index: 100;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    background: rgba(50, 10, 25, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fda4af;
-    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2);
-}
-
-.settings-button:hover {
-    background: rgba(50, 10, 25, 0.6);
-    transform: rotate(90deg);
-}
-
-.settings-panel {
-    position: fixed;
-    top: 4.2rem; /* Tepat di bawah tombol setting */
-    right: 1.5rem;
-    z-index: 99;
-    background: rgba(50, 10, 25, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.75rem 1rem;
-    border-radius: 0.75rem;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-.settings-panel.visible {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-}
-
-.font-sizer {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    color: #fda4af;
-}
-
-.font-sizer .large-a {
-    font-size: 1.25rem; /* Membuat 'A' besar lebih menonjol */
-}
-
-/* Kustomisasi Slider */
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 120px;
-    height: 4px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    background: #e11d48;
-    border-radius: 50%;
-    border: 2px solid #fff1f2;
-}
-
-input[type="range"]::-moz-range-thumb {
-    width: 16px;
-    height: 16px;
-    background: #e11d48;
-    border-radius: 50%;
-    border: 2px solid #fff1f2;
-}
-
-
-/* ================================================================ */
-/* ============== FITUR PENGATUR UKURAN FONT (TEMA TOSKA) ========= */
-/* ================================================================ */
-
-/* Tombol untuk membuka panel */
-#font-adjuster-toggle {
-    position: fixed;
-    top: 1rem;
-    right: 1.5rem;
-    z-index: 1001; /* Harus di atas segalanya */
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    /* BERUBAH: Latar belakang ke toska gelap transparan */
-    background: rgba(15, 50, 45, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    /* BERUBAH: Warna ikon ke toska muda */
-    color: #5eead4;
-    transition: all 0.2s ease-in-out;
-}
-
-#font-adjuster-toggle:hover {
-    /* BERUBAH: Latar belakang hover ke toska lebih pekat */
-    background: rgba(15, 50, 45, 0.6);
-    /* BERUBAH: Warna ikon hover ke toska sangat muda */
-    color: #ccfbf1;
-}
-
-/* Panel pengatur yang tersembunyi */
-#font-adjuster-container {
-    position: fixed;
-    top: 4.5rem; /* Tepat di bawah tombol */
-    right: 1.5rem;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 0.75rem;
-    
-    /* BERUBAH: Efek glassmorphism ke tema toska */
-    background: rgba(15, 50, 45, 0.5);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-
-    /* Sembunyikan secara default */
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#font-adjuster-container.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-/* Ikon huruf 'A' */
-.font-adjuster-icon {
-    /* BERUBAH: Warna ikon ke toska muda */
-    color: #5eead4;
-    font-weight: 600;
-}
-
-/* Kustomisasi Slider */
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 150px;
-    height: 6px;
-    /* BERUBAH: Latar slider ke toska gelap */
-    background: rgba(15, 50, 45, 0.5);
-    border-radius: 5px;
-    outline: none;
-    cursor: pointer;
-}
-
-/* Thumb (Gagang) Slider untuk Chrome/Safari */
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 18px;
-    height: 18px;
-    /* BERUBAH: Warna gagang ke toska terang */
-    background: #14b8a6;
-    border-radius: 50%;
-    /* BERUBAH: Warna border gagang */
-    border: 2px solid #f0fdfa;
-    transition: background-color 0.2s ease;
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-    /* BERUBAH: Warna hover gagang */
-    background-color: #2dd4bf;
-}
-
-/* Thumb (Gagang) Slider untuk Firefox */
-input[type="range"]::-moz-range-thumb {
-    width: 18px;
-    height: 18px;
-    /* BERUBAH: Warna gagang ke toska terang */
-    background: #14b8a6;
-    border-radius: 50%;
-    /* BERUBAH: Warna border gagang */
-    border: 2px solid #f0fdfa;
-    transition: background-color 0.2s ease;
-}
-
-input[type="range"]::-moz-range-thumb:hover {
-    /* BERUBAH: Warna hover gagang */
-    background-color: #2dd4bf;
-}
-
-
-/* Kelas untuk Ukuran Font Konten Artikel */
-/* Target: .text-lg di dalam kontainer yang memiliki kelas font-size-X */
+.ui-controls { position: fixed; top: 1rem; right: 1.5rem; z-index: 1001; display: flex; gap: 0.5rem; }
+#font-adjuster-toggle, #vocab-toggle-button { padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; background: rgba(15, 50, 45, 0.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); color: #5eead4; transition: all 0.2s ease-in-out; }
+#font-adjuster-toggle:hover, #vocab-toggle-button:hover { background: rgba(15, 50, 45, 0.6); color: #ccfbf1; }
+#font-adjuster-container { position: fixed; top: 4.5rem; right: 1.5rem; z-index: 1000; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: rgba(15, 50, 45, 0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); opacity: 0; transform: translateY(-10px); pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
+#font-adjuster-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.font-adjuster-icon { color: #5eead4; font-weight: 600; }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 150px; height: 6px; background: rgba(15, 50, 45, 0.5); border-radius: 5px; outline: none; cursor: pointer; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #14b8a6; border-radius: 50%; border: 2px solid #f0fdfa; transition: background-color 0.2s ease; }
+input[type="range"]::-webkit-slider-thumb:hover { background-color: #2dd4bf; }
+input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; background: #14b8a6; border-radius: 50%; border: 2px solid #f0fdfa; transition: background-color 0.2s ease; }
+input[type="range"]::-moz-range-thumb:hover { background-color: #2dd4bf; }
 #articles-container.font-size-1 .text-lg { font-size: 0.9rem; line-height: 1.5rem; }
 #articles-container.font-size-2 .text-lg { font-size: 1.0rem; line-height: 1.65rem; }
-#articles-container.font-size-3 .text-lg { font-size: 1.125rem; line-height: 1.75rem; } /* Ukuran Default */
+#articles-container.font-size-3 .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
 #articles-container.font-size-4 .text-lg { font-size: 1.25rem; line-height: 1.9rem; }
 #articles-container.font-size-5 .text-lg { font-size: 1.4rem; line-height: 2.1rem; }
 
 
 /* ================================================================ */
+/* ================== GAYA BARU: PANEL BOOKMARK =================== */
+/* ================================================================ */
+#vocab-sidebar { position: fixed; top: 0; right: 0; width: 380px; max-width: 90vw; height: 100%; z-index: 1002; background: rgba(15, 50, 45, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-left: 1px solid rgba(94, 234, 212, 0.2); transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; }
+#vocab-sidebar.visible { transform: translateX(0); }
+.sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid rgba(94, 234, 212, 0.2); flex-shrink: 0; }
+#clear-vocab-button { background-color: rgba(250, 204, 21, 0.3); border: none; color: #fef9c3; padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease; }
+#clear-vocab-button:hover { background-color: rgba(250, 204, 21, 0.6); color: white; }
+#vocab-list { list-style: none; padding: 0.5rem; margin: 0; overflow-y: auto; flex-grow: 1; }
+#vocab-list::-webkit-scrollbar { width: 6px; }
+#vocab-list::-webkit-scrollbar-track { background: transparent; }
+#vocab-list::-webkit-scrollbar-thumb { background-color: rgba(20, 184, 166, 0.6); border-radius: 6px; }
+.vocab-item { padding: 1rem; margin: 0.5rem; border-radius: 0.5rem; background-color: rgba(15, 50, 45, 0.4); border: 1px solid transparent; transition: all 0.2s ease; cursor: pointer; position: relative; }
+.vocab-item:hover { border-color: rgba(94, 234, 212, 0.3); background-color: rgba(15, 50, 45, 0.7); }
+.vocab-item-original { font-weight: 500; color: #ccfbf1; margin-bottom: 0.25rem; }
+.vocab-item-translation { font-size: 0.9rem; color: #fef08a; margin-bottom: 0.75rem; }
+.vocab-item-source { font-size: 0.75rem; color: #9ca3af; border-top: 1px dashed rgba(156, 163, 175, 0.2); padding-top: 0.5rem; }
+.delete-vocab-btn { position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; border: none; background: none; color: #9ca3af; font-size: 1.2rem; line-height: 1; cursor: pointer; transition: color 0.2s ease; opacity: 0.5; }
+.vocab-item:hover .delete-vocab-btn { opacity: 1; }
+.delete-vocab-btn:hover { color: #fef9c3; }
+.empty-vocab-message { text-align: center; padding: 2rem; color: #9ca3af; }
+
+
+/* ================================================================ */
 /* ============= GAYA UNTUK ARTIKEL TIPE SEKUNDER ================= */
 /* ================================================================ */
-
-/* Kontainer utama artikel sekunder */
-.sub-article-container {
-    margin-left: 1.5rem;
-    /* Lebar dihitung 100% dikurangi indentasi margin kiri */
-    width: calc(100% - 1.5rem); 
-    margin-top: 1.5rem;
-}
-
-/* Header artikel sekunder yang lebih kecil */
-.sub-article-container .article-header {
-    padding: 0.75rem 1.25rem; /* Padding lebih kecil */
-    background: rgba(49, 50, 10, 0.4); 
-}
-
-/* Judul header artikel sekunder yang lebih kecil */
-.sub-article-container .article-header h3 {
-    font-size: 1rem; /* Ukuran font lebih kecil */
-    font-weight: 500;
-    color: #ebf871; /* Warna sedikit lebih redup */
-}
-
-/* Ikon collapse artikel sekunder */
-.sub-article-container .article-header .collapse-icon svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* Konten artikel sekunder saat aktif */
-.sub-article-container.active .article-content {
-    max-height: 85vh; 
-}
-
-/* Jarak antar paragraf di artikel sekunder */
-.sub-article-container .article-content-inner p {
-    margin-bottom: 0.8rem;
-}
-
+.sub-article-container { margin-left: 1.5rem; width: calc(100% - 1.5rem); margin-top: 1.5rem; }
+.sub-article-container .article-header { padding: 0.75rem 1.25rem; background: rgba(49, 50, 10, 0.4); }
+.sub-article-container .article-header h3 { font-size: 1rem; font-weight: 500; color: #ebf871; }
+.sub-article-container .article-header .collapse-icon svg { width: 20px; height: 20px; }
+.sub-article-container.active .article-content { max-height: 85vh; }
+.sub-article-container .article-content-inner p { margin-bottom: 0.8rem; }
