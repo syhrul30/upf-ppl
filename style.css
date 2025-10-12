@@ -1,20 +1,24 @@
 /* ================================================================ */
 /* ================== THEME & COLOR PALETTE ===================== */
 /* ================================================================ */
+/* New color palette inspired by the "Ultra-Processed People" book cover */
 :root {
-    --bg-dark: #0A191E;
-    --primary-teal: #00A79D;
-    --accent-yellow: #FDEE21;
-    --text-light: #E8F9FF;
-    --text-medium: #88A0A8;
-    --text-dark: #0A191E;
-    --glass-bg: rgba(0, 167, 157, 0.1);
-    --glass-border: rgba(0, 167, 157, 0.25);
-    --dark-card: rgba(10, 25, 30, 0.5);
-    /* New variables for the yellow button */
-    --accent-yellow-text: #3d3a02; /* Dark text for contrast */
-    --accent-yellow-bg: rgba(253, 238, 33, 0.3); /* Transparent yellow */
-    --accent-yellow-bg-hover: rgba(253, 238, 33, 0.5); /* More opaque for hover */
+    --bg-dark: #08141A; /* Dark desaturated cyan, deeper and more thematic */
+    --primary-teal: #009CA6; /* Muted teal from the book cover */
+    --accent-yellow: #F8DE25; /* Vibrant yellow from the warning sign */
+    --text-light: #F0F4F8; /* A clean, soft off-white */
+    --text-medium: #8295A0; /* A muted grey-blue for secondary text */
+    --text-dark: #2A200A; /* Dark brown for text on yellow backgrounds */
+
+    /* Derived variables for consistency */
+    --glass-bg: rgba(0, 156, 166, 0.1);
+    --glass-border: rgba(0, 156, 166, 0.25);
+    --dark-card: rgba(8, 20, 26, 0.5);
+
+    /* Variables for the yellow button, ensuring readability */
+    --accent-yellow-text: #E8F9FF; /* Light text for better contrast on transparent bg */
+    --accent-yellow-bg: rgba(248, 222, 37, 0.2); /* Transparent yellow */
+    --accent-yellow-bg-hover: rgba(248, 222, 37, 0.4); /* More opaque for hover */
 }
 
 body {
@@ -34,10 +38,11 @@ body {
     width: 100%;
     height: 100%;
     z-index: -1;
-    opacity: 0.04;
+    opacity: 0.03; /* Reduced opacity for subtlety */
     background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
 }
 
+/* NEW: Dynamic, animated background inspired by the book's plastic wrap */
 .background-shapes {
     position: fixed;
     top: 0;
@@ -46,42 +51,23 @@ body {
     height: 100%;
     z-index: -2;
     overflow: hidden;
-}
-
-.shape1, .shape2, .shape3 {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(160px);
-    opacity: 0.5;
-    transition: transform 0.2s linear;
-}
-
-/* Shapes re-colored and re-positioned to feel like sauce splatters */
-.shape1 { width: 600px; height: 600px; background: var(--accent-yellow); top: -40%; left: -30%; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: morph 15s linear infinite alternate; }
-.shape2 { width: 700px; height: 700px; background: var(--primary-teal); bottom: -50%; right: -40%; border-radius: 30% 70% 40% 60% / 50% 60% 30% 40%; animation: morph 18s linear infinite; }
-.shape3 { width: 550px; height: 550px; background: #005f73; bottom: 5%; left: 5%; opacity: 0.4; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation: morph 20s linear infinite alternate-reverse;}
-
-@keyframes morph {
-    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    50% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    background-image:
+        radial-gradient(ellipse at 70% 20%, hsla(185, 45%, 50%, 0.15), transparent 50%),
+        radial-gradient(ellipse at 30% 30%, hsla(39, 90%, 55%, 0.1), transparent 50%),
+        radial-gradient(ellipse at 80% 80%, hsla(185, 45%, 40%, 0.15), transparent 50%);
+    opacity: 0.8;
+    background-size: 200% 200%; /* Make gradients larger to allow movement */
+    animation: moveBackground 8s ease infinite alternate; /* The animation cycle is now 8 seconds */
 }
 
 /* ================================================================ */
 /* =================== CORE UI & LAYOUT ======================= */
 /* ================================================================ */
 header h1 {
-    /* Menerapkan gradien sebagai latar belakang */
     background: linear-gradient(90deg, var(--primary-teal), var(--accent-yellow));
-    
-    /* Memotong latar belakang ke bentuk teks */
     -webkit-background-clip: text;
     background-clip: text;
-
-    /* Membuat warna teks asli menjadi transparan */
     -webkit-text-fill-color: transparent;
-
-    /* HAPUS 'background-size' dan 'animation' dari kode sebelumnya */
 }
 
 header a {
@@ -115,14 +101,14 @@ footer {
 .article-container:not(.sub-article-container) { border-radius: 0.85rem; overflow: hidden; }
 .article-container.visible { opacity: 1; transform: translateY(0); }
 
-.article-header { 
-    display: flex; justify-content: space-between; align-items: center; 
-    cursor: pointer; padding: 1rem 1.5rem; border-radius: 0.85rem; 
-    transition: all 0.3s ease; color: var(--text-light); 
-    background: var(--dark-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); 
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
-    position: sticky; top: 1rem; z-index: 10; 
-    border: 1px solid transparent; background-clip: padding-box; -webkit-background-clip: padding-box; 
+.article-header {
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; padding: 1rem 1.5rem; border-radius: 0.85rem;
+    transition: all 0.3s ease; color: var(--text-light);
+    background: var(--dark-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    position: sticky; top: 1rem; z-index: 10;
+    border: 1px solid transparent; background-clip: padding-box; -webkit-background-clip: padding-box;
 }
 .article-header::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; margin: -1px; border-radius: inherit; background: linear-gradient(120deg, var(--primary-teal), var(--accent-yellow)); opacity: 0.4; }
 .article-header h3 { color: var(--text-light); }
@@ -131,7 +117,7 @@ footer {
 .article-content-inner img { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .article-content-inner img:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
 .article-content-inner p:last-child { margin-bottom: 0; }
-.article-container.active .article-header { border-radius: 0.85rem 0.85rem 0 0; background: rgba(10, 25, 30, 0.7); }
+.article-container.active .article-header { border-radius: 0.85rem 0.85rem 0 0; background: rgba(8, 20, 26, 0.7); }
 .article-container.active .article-content { max-height: 90vh; overflow-y: auto; padding-top: 1.5rem; padding-bottom: 1.5rem; }
 .collapse-icon svg { transition: transform 0.3s ease-in-out; stroke: var(--text-light); }
 .article-container.active .collapse-icon svg { transform: rotate(180deg); }
@@ -144,7 +130,7 @@ footer {
 /* ================== INTERACTIVE ELEMENTS ==================== */
 /* ================================================================ */
 .original-text-segment { cursor: pointer; transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; padding: 2px 4px; border-radius: 6px; }
-.original-text-segment:hover { background-color: rgba(0, 167, 157, 0.2); }
+.original-text-segment:hover { background-color: rgba(0, 156, 166, 0.2); }
 .selected-text { background-color: var(--accent-yellow) !important; color: var(--text-dark) !important; font-weight: 500; }
 
 @keyframes bookmark-blink {
@@ -157,16 +143,16 @@ footer {
 #translation-popup.visible { opacity: 1; pointer-events: auto; }
 #translation-popup::before { content: ''; position: absolute; bottom: 100%; left: 20px; border-width: 8px; border-style: solid; border-color: transparent transparent var(--dark-card) transparent; }
 
-.add-vocab-btn { background-color: rgba(0, 167, 157, 0.3); border: 1px solid var(--glass-border); color: var(--text-light); border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: all 0.2s ease; flex-shrink: 0; }
-.add-vocab-btn:hover { background-color: rgba(0, 167, 157, 0.6); }
-.add-vocab-btn.added { background-color: rgba(253, 238, 33, 0.5); color: var(--text-dark); border-color: rgba(253, 238, 33, 0.7); }
+.add-vocab-btn { background-color: rgba(0, 156, 166, 0.3); border: 1px solid var(--glass-border); color: var(--text-light); border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: all 0.2s ease; flex-shrink: 0; }
+.add-vocab-btn:hover { background-color: rgba(0, 156, 166, 0.6); }
+.add-vocab-btn.added { background-color: rgba(248, 222, 37, 0.5); color: var(--text-dark); border-color: rgba(248, 222, 37, 0.7); }
 
 /* ================================================================ */
 /* ==================== UI CONTROLS & SIDEBAR =================== */
 /* ================================================================ */
 .ui-controls { position: fixed; top: 1rem; right: 1.5rem; z-index: 1001; display: flex; gap: 0.5rem; }
 #font-adjuster-toggle, #vocab-toggle-button { padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; background: var(--dark-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); color: var(--text-light); transition: all 0.2s ease-in-out; }
-#font-adjuster-toggle:hover, #vocab-toggle-button:hover { background: rgba(10, 25, 30, 0.9); color: var(--accent-yellow); }
+#font-adjuster-toggle:hover, #vocab-toggle-button:hover { background: rgba(8, 20, 26, 0.9); color: var(--accent-yellow); }
 #font-adjuster-container { position: fixed; top: 4.5rem; right: 1.5rem; z-index: 1000; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: var(--dark-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); opacity: 0; transform: translateY(-10px); pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
 #font-adjuster-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .font-adjuster-icon { color: var(--text-light); font-weight: 600; }
@@ -174,31 +160,31 @@ input[type="range"] { -webkit-appearance: none; appearance: none; width: 120px; 
 input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: var(--accent-yellow); border-radius: 50%; border: 2px solid var(--text-light); transition: background-color 0.2s ease; }
 input[type="range"]::-webkit-slider-thumb:hover { background-color: #fffb85; }
 
-#vocab-sidebar { position: fixed; top: 0; right: 0; width: 380px; max-width: 90vw; height: 100%; z-index: 1002; background: rgba(10, 25, 30, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-left: 1px solid var(--glass-border); transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; }
+#vocab-sidebar { position: fixed; top: 0; right: 0; width: 380px; max-width: 90vw; height: 100%; z-index: 1002; background: rgba(8, 20, 26, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-left: 1px solid var(--glass-border); transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; }
 #vocab-sidebar.visible { transform: translateX(0); }
 .sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--glass-border); flex-shrink: 0; }
 .sidebar-header h3 { color: var(--text-light); }
-/* The button now uses the yellow accent color */
-#clear-vocab-button { 
-    background-color: var(--accent-yellow-bg); 
-    border: none; 
-    color: var(--text-light); /* Baris ini yang diubah */
-    font-weight: 500; 
-    padding: 0.25rem 0.75rem; 
-    border-radius: 0.5rem; 
-    font-size: 0.8rem; 
-    cursor: pointer; 
-    transition: all 0.2s ease; 
+/* The button now uses the new yellow accent theme */
+#clear-vocab-button {
+    background-color: var(--accent-yellow-bg);
+    border: none;
+    color: var(--accent-yellow-text); /* Updated for better contrast */
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
-#clear-vocab-button:hover { 
-    background-color: var(--accent-yellow-bg-hover); 
-    color: var(--text-dark); /* Saat hover, teks bisa diubah menjadi gelap agar tetap kontras */
+#clear-vocab-button:hover {
+    background-color: var(--accent-yellow-bg-hover);
+    color: var(--text-light); /* Text becomes lighter on darker hover */
 }
 #vocab-list::-webkit-scrollbar { width: 6px; }
 #vocab-list::-webkit-scrollbar-track { background: transparent; }
-#vocab-list::-webkit-scrollbar-thumb { background-color: rgba(253, 238, 33, 0.6); border-radius: 6px; }
+#vocab-list::-webkit-scrollbar-thumb { background-color: rgba(248, 222, 37, 0.6); border-radius: 6px; }
 .vocab-item { padding: 1rem; margin: 0.5rem; border-radius: 0.5rem; background-color: var(--glass-bg); border: 1px solid transparent; transition: all 0.2s ease; cursor: pointer; position: relative; }
-.vocab-item:hover { border-color: var(--glass-border); background-color: rgba(0, 167, 157, 0.2); }
+.vocab-item:hover { border-color: var(--glass-border); background-color: rgba(0, 156, 166, 0.2); }
 .vocab-item-original { font-weight: 500; color: var(--text-light); margin-bottom: 0.25rem; }
 .vocab-item-translation { font-size: 0.9rem; color: var(--primary-teal); margin-bottom: 0.75rem; }
 .vocab-item-source { font-size: 0.75rem; color: var(--text-medium); border-top: 1px dashed rgba(136, 160, 168, 0.2); padding-top: 0.5rem; }
@@ -234,7 +220,7 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #fffb85; }
 /* ================================================================ */
 /* =================== IMAGE PREVIEW MODAL ====================== */
 /* ================================================================ */
-#image-preview-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 25, 30, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; overflow: hidden; }
+#image-preview-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(8, 20, 26, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; overflow: hidden; }
 #image-preview-overlay.visible { opacity: 1; pointer-events: auto; }
 #preview-image { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 0.5rem; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); transition: transform 0.2s ease-out; transform-origin: center center; }
 #preview-image.pannable { cursor: grab; }
@@ -242,6 +228,16 @@ input[type="range"]::-webkit-slider-thumb:hover { background-color: #fffb85; }
 
 .preview-controls { position: absolute; top: 50%; transform: translateY(-50%); right: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; background-color: var(--dark-card); padding: 0.75rem 0.5rem; border-radius: 0.75rem; z-index: 10; }
 .preview-control-btn { width: 40px; height: 40px; border: none; border-radius: 50%; background-color: var(--dark-card); color: var(--text-light); font-size: 1.5rem; font-weight: bold; line-height: 1; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
-.preview-control-btn:hover { background-color: rgba(10, 25, 30, 0.9); color: var(--accent-yellow); }
+.preview-control-btn:hover { background-color: rgba(8, 20, 26, 0.9); color: var(--accent-yellow); }
 #preview-close-button { font-size: 2rem; order: 4; }
 #preview-close-button:hover { transform: rotate(90deg); }
+
+/* Keyframes for the dynamic background movement */
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 0%, 100% 50%, 50% 100%;
+    }
+    100% {
+        background-position: 100% 100%, 0% 50%, 50% 0%;
+    }
+}
