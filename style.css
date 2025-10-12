@@ -1,66 +1,107 @@
-/* Gaya dasar & Latar Belakang */
+/* ================================================================ */
+/* ================== THEME & COLOR PALETTE ===================== */
+/* ================================================================ */
+:root {
+    --bg-dark: #0A191E;
+    --primary-teal: #00A79D;
+    --accent-yellow: #FDEE21;
+    --text-light: #E8F9FF;
+    --text-medium: #88A0A8;
+    --text-dark: #0A191E;
+    --glass-bg: rgba(0, 167, 157, 0.1);
+    --glass-border: rgba(0, 167, 157, 0.25);
+    --dark-card: rgba(10, 25, 30, 0.5);
+    /* New variables for the yellow button */
+    --accent-yellow-text: #3d3a02; /* Dark text for contrast */
+    --accent-yellow-bg: rgba(253, 238, 33, 0.3); /* Transparent yellow */
+    --accent-yellow-bg-hover: rgba(253, 238, 33, 0.5); /* More opaque for hover */
+}
+
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #000000;
+    background-color: var(--bg-dark);
+    color: var(--text-medium);
     overflow-x: hidden;
 }
 
 /* ================================================================ */
-/* ============= EFEK LATAR BELAKANG CAIR (LIQUID) ================ */
+/* ================= THEMATIC BACKGROUND EFFECTS ================ */
 /* ================================================================ */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.04;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+}
+
 .background-shapes {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: -2;
+    overflow: hidden;
 }
 
-.shape1, .shape2 {
+.shape1, .shape2, .shape3 {
     position: absolute;
     border-radius: 50%;
-    filter: blur(150px);
+    filter: blur(160px);
+    opacity: 0.5;
+    transition: transform 0.2s linear;
 }
 
-.shape1 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(20, 184, 166, 0.4) 0%, rgba(0,0,0,0) 70%);
-    top: -10%;
-    left: -10%;
-    animation: moveShape1 20s infinite alternate ease-in-out;
-}
+/* Shapes re-colored and re-positioned to feel like sauce splatters */
+.shape1 { width: 600px; height: 600px; background: var(--accent-yellow); top: -40%; left: -30%; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: morph 15s linear infinite alternate; }
+.shape2 { width: 700px; height: 700px; background: var(--primary-teal); bottom: -50%; right: -40%; border-radius: 30% 70% 40% 60% / 50% 60% 30% 40%; animation: morph 18s linear infinite; }
+.shape3 { width: 550px; height: 550px; background: #005f73; bottom: 5%; left: 5%; opacity: 0.4; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; animation: morph 20s linear infinite alternate-reverse;}
 
-.shape2 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(253, 224, 71, 0.2) 0%, rgba(0,0,0,0) 70%);
-    bottom: -15%;
-    right: -15%;
-    animation: moveShape2 25s infinite alternate ease-in-out;
+@keyframes morph {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
 }
-
-@keyframes moveShape1 {
-    from { transform: translate(-20%, -20%) rotate(0deg); }
-    to { transform: translate(20%, 20%) rotate(360deg); }
-}
-
-@keyframes moveShape2 {
-    from { transform: translate(10%, 10%) rotate(0deg); }
-    to { transform: translate(-10%, -10%) rotate(180deg); }
-}
-
 
 /* ================================================================ */
-/* ============ GAYA BARU: PROGRES BAR & SCROLL REVEAL ============ */
+/* =================== CORE UI & LAYOUT ======================= */
 /* ================================================================ */
+header h1 {
+    /* Menerapkan gradien sebagai latar belakang */
+    background: linear-gradient(90deg, var(--primary-teal), var(--accent-yellow));
+    
+    /* Memotong latar belakang ke bentuk teks */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* Membuat warna teks asli menjadi transparan */
+    -webkit-text-fill-color: transparent;
+
+    /* HAPUS 'background-size' dan 'animation' dari kode sebelumnya */
+}
+
+header a {
+    color: var(--accent-yellow) !important;
+}
+header a:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 8px var(--accent-yellow);
+}
+
+footer {
+    color: var(--text-medium);
+}
+
 #progress-bar {
     position: fixed;
     top: 0;
     left: 0;
     height: 4px;
-    background: linear-gradient(90deg, #14b8a6, #2dd4bf, #fde047);
+    background: linear-gradient(90deg, var(--primary-teal), var(--accent-yellow));
     width: 0%;
     z-index: 9999;
     transition: width 0.1s linear;
@@ -71,123 +112,136 @@ body {
     transform: translateY(30px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
+.article-container:not(.sub-article-container) { border-radius: 0.85rem; overflow: hidden; }
+.article-container.visible { opacity: 1; transform: translateY(0); }
 
-.article-container.visible {
-    opacity: 1;
-    transform: translateY(0);
+.article-header { 
+    display: flex; justify-content: space-between; align-items: center; 
+    cursor: pointer; padding: 1rem 1.5rem; border-radius: 0.85rem; 
+    transition: all 0.3s ease; color: var(--text-light); 
+    background: var(--dark-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); 
+    position: sticky; top: 1rem; z-index: 10; 
+    border: 1px solid transparent; background-clip: padding-box; -webkit-background-clip: padding-box; 
 }
-
-/* ================================================================ */
-/* ========== GAYA BARU: SOROTAN ARTIKEL (HIGHLIGHT) ============== */
-/* ================================================================ */
-@keyframes temporary-highlight {
-    0% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.5); }
-    50% { box-shadow: 0 0 25px 8px rgba(20, 184, 166, 0.3); }
-    100% { box-shadow: 0 0 0 0 rgba(20, 184, 166, 0); }
-}
-
-.article-highlight {
-    animation: temporary-highlight 2s ease-out;
-}
-
-
-/* ================================================================ */
-/* ================= EFEK KACA (GLASSMORPHISM) ==================== */
-/* ================================================================ */
-.article-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 1rem 1.5rem; border-radius: 0.75rem; transition: all 0.3s ease; color: #5eead4; background: rgba(15, 50, 45, 0.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); position: sticky; top: 1rem; z-index: 10; }
-.article-header h3 { color: #ccfbf1; }
-.article-content { background: rgba(15, 50, 45, 0.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 0px solid rgba(255, 255, 255, 0.1); border-top: none; border-radius: 0 0 0.75rem 0.75rem; max-height: 0; overflow: hidden; transition: max-height 0.7s ease-in-out, padding 0.5s ease-in-out; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0; padding-bottom: 0; }
+.article-header::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -1; margin: -1px; border-radius: inherit; background: linear-gradient(120deg, var(--primary-teal), var(--accent-yellow)); opacity: 0.4; }
+.article-header h3 { color: var(--text-light); }
+.article-content { background: var(--dark-card); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 0px solid rgba(255, 255, 255, 0.1); border-top: none; border-radius: 0 0 0.85rem 0.85rem; max-height: 0; overflow: hidden; transition: max-height 0.7s ease-in-out, padding 0.5s ease-in-out; padding-left: 1.5rem; padding-right: 1.5rem; padding-top: 0; padding-bottom: 0; }
 .article-content-inner p { margin-bottom: 1rem; text-align: justify; text-indent: 2em; }
+.article-content-inner img { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.article-content-inner img:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
 .article-content-inner p:last-child { margin-bottom: 0; }
-.article-container.active .article-header { border-radius: 0.75rem 0.75rem 0 0; background: rgba(15, 50, 45, 0.5); }
+.article-container.active .article-header { border-radius: 0.85rem 0.85rem 0 0; background: rgba(10, 25, 30, 0.7); }
 .article-container.active .article-content { max-height: 90vh; overflow-y: auto; padding-top: 1.5rem; padding-bottom: 1.5rem; }
-.collapse-icon svg { transition: transform 0.3s ease-in-out; stroke: #5eead4; }
+.collapse-icon svg { transition: transform 0.3s ease-in-out; stroke: var(--text-light); }
 .article-container.active .collapse-icon svg { transform: rotate(180deg); }
 .article-content::-webkit-scrollbar { width: 8px; }
-.article-content::-webkit-scrollbar-track { background: rgba(15, 50, 45, 0.1); border-radius: 10px; }
-.article-content::-webkit-scrollbar-thumb { background-color: #14b8a6; border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
-.article-content::-webkit-scrollbar-thumb:hover { background-color: #2dd4bf; }
-
+.article-content::-webkit-scrollbar-track { background: rgba(10, 25, 30, 0.1); border-radius: 10px; }
+.article-content::-webkit-scrollbar-thumb { background-color: var(--accent-yellow); border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
+.article-content::-webkit-scrollbar-thumb:hover { background-color: #fffb85; }
 
 /* ================================================================ */
-/* ============= GAYA POP-UP (DENGAN TOMBOL BOOKMARK) ============= */
+/* ================== INTERACTIVE ELEMENTS ==================== */
 /* ================================================================ */
-.original-text-segment { cursor: pointer; transition: background-color 0.2s ease-in-out; padding: 2px 4px; border-radius: 6px; }
-.original-text-segment:hover { background-color: rgba(20, 184, 166, 0.2); }
-.selected-text { background-color: #14b8a6; color: #f0fdfa; font-weight: 500; }
-#translation-popup { display: flex; align-items: center; gap: 0.75rem; position: absolute; z-index: 20; transform: translateY(8px); transition: opacity 0.2s ease-in-out; pointer-events: none; opacity: 0; padding: 0.75rem; border-radius: 0.5rem; max-width: 500px; font-size: 0.9rem; color: #fef08a; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(253, 224, 71, 0.15); }
+.original-text-segment { cursor: pointer; transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out; padding: 2px 4px; border-radius: 6px; }
+.original-text-segment:hover { background-color: rgba(0, 167, 157, 0.2); }
+.selected-text { background-color: var(--accent-yellow) !important; color: var(--text-dark) !important; font-weight: 500; }
+
+@keyframes bookmark-blink {
+    0%, 100% { background-color: transparent; color: inherit; }
+    50% { background-color: var(--accent-yellow); color: var(--text-dark); font-weight: 500; }
+}
+.bookmark-highlight { animation: bookmark-blink 0.8s ease-in-out 3; }
+
+#translation-popup { display: flex; align-items: center; gap: 0.75rem; position: absolute; z-index: 20; transform: translateY(8px); transition: opacity 0.2s ease-in-out; pointer-events: none; opacity: 0; padding: 0.75rem; border-radius: 0.5rem; max-width: 450px; font-size: 0.9rem; color: var(--text-light); background: var(--dark-card); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
 #translation-popup.visible { opacity: 1; pointer-events: auto; }
-#translation-popup::before { content: ''; position: absolute; bottom: 100%; left: 20px; border-width: 8px; border-style: solid; border-color: transparent transparent rgba(0, 0, 0, 0.5) transparent; }
-.add-vocab-btn { background-color: rgba(253, 224, 71, 0.2); border: 1px solid rgba(253, 224, 71, 0.4); color: #fef08a; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: all 0.2s ease; flex-shrink: 0; }
-.add-vocab-btn:hover { background-color: rgba(253, 224, 71, 0.4); color: white; }
-.add-vocab-btn.added { background-color: rgba(20, 184, 166, 0.5); color: white; border-color: rgba(20, 184, 166, 0.7); }
+#translation-popup::before { content: ''; position: absolute; bottom: 100%; left: 20px; border-width: 8px; border-style: solid; border-color: transparent transparent var(--dark-card) transparent; }
+
+.add-vocab-btn { background-color: rgba(0, 167, 157, 0.3); border: 1px solid var(--glass-border); color: var(--text-light); border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; transition: all 0.2s ease; flex-shrink: 0; }
+.add-vocab-btn:hover { background-color: rgba(0, 167, 157, 0.6); }
+.add-vocab-btn.added { background-color: rgba(253, 238, 33, 0.5); color: var(--text-dark); border-color: rgba(253, 238, 33, 0.7); }
 
 /* ================================================================ */
-/* ============== INOVASI: DYNAMIC GLASS & SMOOTH REVEAL ========== */
-/* ================================================================ */
-.article-header h3, .article-header .collapse-icon { transform: translateZ(25px); transition: transform 0.4s ease-out; }
-.article-header:hover { transform: perspective(1000px) rotateX(5deg) rotateY(-8deg) scale(1.03); box-shadow: 0 10px 30px -5px rgba(20, 184, 166, 0.3); }
-.article-header:hover .collapse-icon { transform: translateZ(40px) rotate(-10deg); }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-.article-container .article-content-inner > * { opacity: 0; }
-.article-container.active .article-content-inner > * { animation: fadeInUp 0.6s ease-out forwards; }
-.article-container.active .article-content-inner > *:nth-child(1) { animation-delay: 0.1s; }
-.article-container.active .article-content-inner > *:nth-child(2) { animation-delay: 0.2s; }
-.article-container.active .article-content-inner > *:nth-child(3) { animation-delay: 0.3s; }
-.article-container.active .article-content-inner > *:nth-child(4) { animation-delay: 0.4s; }
-.article-container.active .article-content-inner > *:nth-child(5) { animation-delay: 0.5s; }
-
-
-/* ================================================================ */
-/* ================= GAYA BARU: KONTROL UI & FONT ================= */
+/* ==================== UI CONTROLS & SIDEBAR =================== */
 /* ================================================================ */
 .ui-controls { position: fixed; top: 1rem; right: 1.5rem; z-index: 1001; display: flex; gap: 0.5rem; }
-#font-adjuster-toggle, #vocab-toggle-button { padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; background: rgba(15, 50, 45, 0.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); color: #5eead4; transition: all 0.2s ease-in-out; }
-#font-adjuster-toggle:hover, #vocab-toggle-button:hover { background: rgba(15, 50, 45, 0.6); color: #ccfbf1; }
-#font-adjuster-container { position: fixed; top: 4.5rem; right: 1.5rem; z-index: 1000; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: rgba(15, 50, 45, 0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); opacity: 0; transform: translateY(-10px); pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
+#font-adjuster-toggle, #vocab-toggle-button { padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; background: var(--dark-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); color: var(--text-light); transition: all 0.2s ease-in-out; }
+#font-adjuster-toggle:hover, #vocab-toggle-button:hover { background: rgba(10, 25, 30, 0.9); color: var(--accent-yellow); }
+#font-adjuster-container { position: fixed; top: 4.5rem; right: 1.5rem; z-index: 1000; display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; border-radius: 0.75rem; background: var(--dark-card); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--glass-border); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); opacity: 0; transform: translateY(-10px); pointer-events: none; transition: opacity 0.3s ease, transform 0.3s ease; }
 #font-adjuster-container.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-.font-adjuster-icon { color: #5eead4; font-weight: 600; }
-input[type="range"] { -webkit-appearance: none; appearance: none; width: 150px; height: 6px; background: rgba(15, 50, 45, 0.5); border-radius: 5px; outline: none; cursor: pointer; }
-input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: #14b8a6; border-radius: 50%; border: 2px solid #f0fdfa; transition: background-color 0.2s ease; }
-input[type="range"]::-webkit-slider-thumb:hover { background-color: #2dd4bf; }
-input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; background: #14b8a6; border-radius: 50%; border: 2px solid #f0fdfa; transition: background-color 0.2s ease; }
-input[type="range"]::-moz-range-thumb:hover { background-color: #2dd4bf; }
+.font-adjuster-icon { color: var(--text-light); font-weight: 600; }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 120px; height: 4px; background: rgba(0, 0, 0, 0.3); border-radius: 5px; outline: none; cursor: pointer; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; background: var(--accent-yellow); border-radius: 50%; border: 2px solid var(--text-light); transition: background-color 0.2s ease; }
+input[type="range"]::-webkit-slider-thumb:hover { background-color: #fffb85; }
+
+#vocab-sidebar { position: fixed; top: 0; right: 0; width: 380px; max-width: 90vw; height: 100%; z-index: 1002; background: rgba(10, 25, 30, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-left: 1px solid var(--glass-border); transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; }
+#vocab-sidebar.visible { transform: translateX(0); }
+.sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid var(--glass-border); flex-shrink: 0; }
+.sidebar-header h3 { color: var(--text-light); }
+/* The button now uses the yellow accent color */
+#clear-vocab-button { 
+    background-color: var(--accent-yellow-bg); 
+    border: none; 
+    color: var(--text-light); /* Baris ini yang diubah */
+    font-weight: 500; 
+    padding: 0.25rem 0.75rem; 
+    border-radius: 0.5rem; 
+    font-size: 0.8rem; 
+    cursor: pointer; 
+    transition: all 0.2s ease; 
+}
+#clear-vocab-button:hover { 
+    background-color: var(--accent-yellow-bg-hover); 
+    color: var(--text-dark); /* Saat hover, teks bisa diubah menjadi gelap agar tetap kontras */
+}
+#vocab-list::-webkit-scrollbar { width: 6px; }
+#vocab-list::-webkit-scrollbar-track { background: transparent; }
+#vocab-list::-webkit-scrollbar-thumb { background-color: rgba(253, 238, 33, 0.6); border-radius: 6px; }
+.vocab-item { padding: 1rem; margin: 0.5rem; border-radius: 0.5rem; background-color: var(--glass-bg); border: 1px solid transparent; transition: all 0.2s ease; cursor: pointer; position: relative; }
+.vocab-item:hover { border-color: var(--glass-border); background-color: rgba(0, 167, 157, 0.2); }
+.vocab-item-original { font-weight: 500; color: var(--text-light); margin-bottom: 0.25rem; }
+.vocab-item-translation { font-size: 0.9rem; color: var(--primary-teal); margin-bottom: 0.75rem; }
+.vocab-item-source { font-size: 0.75rem; color: var(--text-medium); border-top: 1px dashed rgba(136, 160, 168, 0.2); padding-top: 0.5rem; }
+.delete-vocab-btn { position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; border: none; background: none; color: var(--text-medium); font-size: 1.2rem; line-height: 1; cursor: pointer; transition: color 0.2s ease; opacity: 0.5; }
+.vocab-item:hover .delete-vocab-btn { opacity: 1; }
+.delete-vocab-btn:hover { color: var(--accent-yellow); }
+.empty-vocab-message { text-align: center; padding: 2rem; color: var(--text-medium); }
+
+/* ================================================================ */
+/* ================== SUB-ARTICLES & FONT SIZES ================= */
+/* ================================================================ */
 #articles-container.font-size-1 .text-lg { font-size: 0.9rem; line-height: 1.5rem; }
 #articles-container.font-size-2 .text-lg { font-size: 1.0rem; line-height: 1.65rem; }
 #articles-container.font-size-3 .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
 #articles-container.font-size-4 .text-lg { font-size: 1.25rem; line-height: 1.9rem; }
 #articles-container.font-size-5 .text-lg { font-size: 1.4rem; line-height: 2.1rem; }
 
-
-/* ================================================================ */
-/* ================== GAYA BARU: PANEL BOOKMARK =================== */
-/* ================================================================ */
-#vocab-sidebar { position: fixed; top: 0; right: 0; width: 380px; max-width: 90vw; height: 100%; z-index: 1002; background: rgba(15, 50, 45, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-left: 1px solid rgba(94, 234, 212, 0.2); transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); display: flex; flex-direction: column; }
-#vocab-sidebar.visible { transform: translateX(0); }
-.sidebar-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.5rem; border-bottom: 1px solid rgba(94, 234, 212, 0.2); flex-shrink: 0; }
-#clear-vocab-button { background-color: rgba(250, 204, 21, 0.3); border: none; color: #fef9c3; padding: 0.25rem 0.75rem; border-radius: 0.5rem; font-size: 0.8rem; cursor: pointer; transition: all 0.2s ease; }
-#clear-vocab-button:hover { background-color: rgba(250, 204, 21, 0.6); color: white; }
-#vocab-list { list-style: none; padding: 0.5rem; margin: 0; overflow-y: auto; flex-grow: 1; }
-#vocab-list::-webkit-scrollbar { width: 6px; }
-#vocab-list::-webkit-scrollbar-track { background: transparent; }
-#vocab-list::-webkit-scrollbar-thumb { background-color: rgba(20, 184, 166, 0.6); border-radius: 6px; }
-.vocab-item { padding: 1rem; margin: 0.5rem; border-radius: 0.5rem; background-color: rgba(15, 50, 45, 0.4); border: 1px solid transparent; transition: all 0.2s ease; cursor: pointer; position: relative; }
-.vocab-item:hover { border-color: rgba(94, 234, 212, 0.3); background-color: rgba(15, 50, 45, 0.7); }
-.vocab-item-original { font-weight: 500; color: #ccfbf1; margin-bottom: 0.25rem; }
-.vocab-item-translation { font-size: 0.9rem; color: #fef08a; margin-bottom: 0.75rem; }
-.vocab-item-source { font-size: 0.75rem; color: #9ca3af; border-top: 1px dashed rgba(156, 163, 175, 0.2); padding-top: 0.5rem; }
-.delete-vocab-btn { position: absolute; top: 0.5rem; right: 0.5rem; width: 20px; height: 20px; border: none; background: none; color: #9ca3af; font-size: 1.2rem; line-height: 1; cursor: pointer; transition: color 0.2s ease; opacity: 0.5; }
-.vocab-item:hover .delete-vocab-btn { opacity: 1; }
-.delete-vocab-btn:hover { color: #fef9c3; }
-.empty-vocab-message { text-align: center; padding: 2rem; color: #9ca3af; }
-
-
-/* ================================================================ */
-/* ============= GAYA UNTUK ARTIKEL TIPE SEKUNDER ================= */
-/* ================================================================ */
-.sub-article-container { margin-left: 1.5rem; width: calc(100% - 1.5rem); margin-top: 1.5rem; }
-.sub-article-container .article-header { padding: 0.75rem 1.25rem; background: rgba(49, 50, 10, 0.4); }
-.sub-article-container .article-header h3 { font-size: 1rem; font-weight: 500; color: #ebf871; }
-.sub-article-container .article-header .collapse-icon svg { width: 20px; height: 20px; }
-.sub-article-container.active .article-content { max-height: 85vh; }
+.sub-article-container { margin-left: 1.5rem; width: calc(100% - 1.5rem); margin-top: 1.5rem; position: relative; }
+.sub-article-container .article-header { background: transparent; backdrop-filter: none; box-shadow: none; border: none; border-radius: 0.5rem; padding: 0.5rem 1rem; }
+.sub-article-container .article-header::before { display: none; }
+.sub-article-container .article-header h3 { font-size: 1rem; font-weight: 500; color: var(--text-medium); transition: color 0.3s ease; }
+.sub-article-container .article-header .collapse-icon svg { width: 20px; height: 20px; stroke: var(--text-medium); transition: stroke 0.3s ease, transform 0.3s ease-in-out; }
+.sub-article-container .article-content { background: transparent; backdrop-filter: none; padding-left: 1rem; border-radius: 0 0 0.5rem 0.5rem; }
+.sub-article-container::before { content: ''; position: absolute; left: -0.75rem; top: 0; bottom: 0; width: 2px; background-color: rgba(136, 160, 168, 0.2); border-radius: 2px; }
+.sub-article-container.active .article-header { border-radius: 0.5rem 0.5rem 0 0; }
+.sub-article-container.active .article-header h3 { color: var(--accent-yellow); }
+.sub-article-container.active .article-header .collapse-icon svg { stroke: var(--text-light); transform: rotate(180deg); }
+.sub-article-container.active .article-content { max-height: 93vh; }
 .sub-article-container .article-content-inner p { margin-bottom: 0.8rem; }
+.sub-article-container .article-content-inner { opacity: 0; transform: translateY(-15px); transition: opacity 0.4s ease-out 0.2s, transform 0.4s ease-out 0.2s; }
+.sub-article-container.active .article-content-inner { opacity: 1; transform: translateY(0); }
+
+/* ================================================================ */
+/* =================== IMAGE PREVIEW MODAL ====================== */
+/* ================================================================ */
+#image-preview-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 25, 30, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out; overflow: hidden; }
+#image-preview-overlay.visible { opacity: 1; pointer-events: auto; }
+#preview-image { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 0.5rem; box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); transition: transform 0.2s ease-out; transform-origin: center center; }
+#preview-image.pannable { cursor: grab; }
+#preview-image.panning { cursor: grabbing; }
+
+.preview-controls { position: absolute; top: 50%; transform: translateY(-50%); right: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; background-color: var(--dark-card); padding: 0.75rem 0.5rem; border-radius: 0.75rem; z-index: 10; }
+.preview-control-btn { width: 40px; height: 40px; border: none; border-radius: 50%; background-color: var(--dark-card); color: var(--text-light); font-size: 1.5rem; font-weight: bold; line-height: 1; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; }
+.preview-control-btn:hover { background-color: rgba(10, 25, 30, 0.9); color: var(--accent-yellow); }
+#preview-close-button { font-size: 2rem; order: 4; }
+#preview-close-button:hover { transform: rotate(90deg); }
